@@ -29,6 +29,14 @@ flowchart TD
 Naming the skill in ordinary language is sufficient: “Use implement for issue 12.”
 An unnamed implementation request gets a proposed route rather than an automatic start.
 
+## Where behavior is described
+
+A spec answers “what was requested then, and why”. After merge, nobody rewrites it.
+No separate document describes current behavior. The project’s tests show it.
+`DOMAIN.md` holds terms; ADRs hold lasting decisions and deliberate non-goals.
+A new issue links the earlier one and names the criterion it replaces.
+[Requirements](agents/requirements.md#current-behavior-and-history) list the source for each question.
+
 ## Review and corrections
 
 `code-review` starts independent Standards and Spec reviewers; they return reports rather than edit files.
