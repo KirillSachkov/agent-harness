@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Ask Matt
 
-Read root `AGENTS.md` for the project's explicit start, language, authority, and context pointers. Advise which user-only entrypoint to select; do not start one implicitly. Here every implementation needs an issue, full specs remain conditional, and both implementation routes finish through `ship` as a verified PR for owner acceptance.
+Before advising a route, read root `AGENTS.md` and its preparation pointers for project policy.
 
 You don't remember every skill, so ask.
 

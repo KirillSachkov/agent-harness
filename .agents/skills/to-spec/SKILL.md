@@ -4,7 +4,7 @@ description: "Turn the current conversation into a spec and publish it to the pr
 disable-model-invocation: true
 ---
 
-Read the requirements and human-participation pointers in root `AGENTS.md`. Apply its language rule to the published artifact and headings. Include preserved behavior and agreed human checkpoints. A change spec is not a current capability document, and publication does not start implementation.
+Before drafting, read the requirements, testing, and human-participation pointers in root `AGENTS.md`. Apply its language rule to the published artifact.
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
@@ -18,7 +18,7 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 Check with the user that these seams match their expectations.
 
-3. Draft from the agreed decisions using the template. Confirm behavior, scope, criteria, and human checkpoints with the owner before publishing as ready. Apply the configured readiness label; it does not authorize execution.
+3. Draft from the agreed decisions using the template. Confirm the draft with the owner before publishing as ready. Apply the configured readiness label.
 
 <spec-template>
 
@@ -28,7 +28,7 @@ The problem that the user is facing, from the user's perspective.
 
 ## Solution
 
-The solution to the problem, from the user's perspective.
+The solution to the problem, from the user's perspective. Include the behavior this change must preserve.
 
 ## User Stories
 
@@ -62,8 +62,8 @@ Exception: if a prototype produced a snippet that encodes a decision more precis
 
 A list of testing decisions that were made. Include:
 
-- A description of what makes a good test (only test external behavior, not implementation details)
-- Which modules will be tested
+- The chosen seams, observable behaviors, and expected results for this change
+- Task-specific infrastructure or substitute decisions under the project's testing rules
 - Prior art for the tests (i.e. similar types of tests in the codebase)
 
 ## Out of Scope
