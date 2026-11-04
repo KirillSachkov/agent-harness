@@ -27,11 +27,11 @@ Keep proposed and implemented behavior distinct.
 In a project that adopts this harness, each question about current behavior has one owner:
 
 - Behavior: the project’s tests at agreed seams. Name each test by the behavior it checks.
-- Terms and the rules inside their definitions: `DOMAIN.md`.
+- Terms: `DOMAIN.md`.
 - Decisions that meet the ADR criteria in `domain-modeling`, including deliberate non-goals: ADRs.
 
 Such a project keeps current behavior in these sources only, without a separate prose document.
-A lasting requirement that a test cannot check goes into the `DOMAIN.md` definition it constrains or into a qualifying ADR.
+A lasting requirement that a test cannot check goes into an ADR when it meets those criteria.
 Otherwise its issue remains its record.
 
 ## When requirements change
