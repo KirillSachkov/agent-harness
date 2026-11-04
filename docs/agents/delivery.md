@@ -38,7 +38,6 @@ Merge requires the owner’s explicit approval of the delivered head; an agent r
 Use `gh pr merge <number> --squash --match-head-commit <approved-sha>` for an authorized merge.
 A changed head needs renewed approval.
 Agent review, an implementation start and green CI do not independently grant merge permission.
-Prefix agent-authored tracker messages with `Agent (<client>):` or `Агент (<client>):` in the selected language.
 Never write an approval as if the owner authored it.
 Shared-account authorship does not prove human approval; use the owner’s actual communication.
 

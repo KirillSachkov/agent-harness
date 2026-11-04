@@ -2,6 +2,12 @@
 
 Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
 
+## Message authorship
+
+Use the human language selected in root `AGENTS.md` for titles, headings, bodies and comments.
+Prefix agent-authored messages with `Agent (<client>):` for English or `Агент (<client>):` for Russian.
+Put skill-specific disclosures after this prefix, in the selected language.
+
 ## Conventions
 
 - **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.

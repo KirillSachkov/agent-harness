@@ -105,7 +105,7 @@ One larger card. Candidate name, one sentence on why, anchor link to its card. T
 
 ## Tone
 
-Plain English, concise, but the architectural nouns and verbs come straight from the `/codebase-design` skill. Concision is not an excuse to drift.
+Use the human language selected in root `AGENTS.md`, with concise, plain sentences. Keep the architectural vocabulary from `/codebase-design`. Concision is not an excuse to drift.
 
 **Use exactly:** module, interface, implementation, depth, deep, shallow, seam, adapter, leverage, locality.
 

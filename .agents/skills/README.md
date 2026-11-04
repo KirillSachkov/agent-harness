@@ -25,6 +25,7 @@ If independent subagents are unavailable, report independent review as unavailab
 - `pr` uses the selected human language, conditional presentation guidance and visible human actions.
 - `ship` delivers through existing project testing/tracker contracts; it does not deploy or approve merge.
 - Setup selects English or Russian human language and preserves existing settings and equivalent pointers.
+- Explanations and architecture reports follow that language. Tracker authorship precedes localized triage disclosures.
 - `ask-matt`, `to-spec`, `to-tickets` and diagnosis follow the same project authority.
 
 ## Notices and updates
@@ -43,7 +44,7 @@ Hashes establish identity, not correctness or behavior.
 
 | Skill | SHA-256 |
 | --- | --- |
-| `ask-matt` | `7c59fa688e458cc161526ac70abfade102471a50424b8c04ae93a92570b91144` |
+| `ask-matt` | `7aa43f43e29019b6f0f8b53e173a69237cdbcb6be6974e97a65a2ac734c14c75` |
 | `code-review` | `651145cbbce0a813dce3071e720b54009af4e54fdfe6ae06a79b48ac10281007` |
 | `codebase-design` | `5e680d83ed795dfdce570831c31c7e95927c3a3403a2f71006c8684f35472b84` |
 | `diagnosing-bugs` | `7f45fd315cf2ce923ff2208eb76d4ba3189f5e14b0b1ff33ff5256265ddd3bd9` |
@@ -54,8 +55,8 @@ Hashes establish identity, not correctness or behavior.
 | `handoff` | `77c2607c751b7c522e0208ab113ba4949f8267610d6061323c7ccd3ace21d7da` |
 | `implement` | `95af274086aef8db8a8c51b078d9d2f0d108a28796d1e84e373536f88f3664fe` |
 | `implement-spec` | `8cfbe422e17966c2dd77c8dee31855c94068e785b791175680ac7dbff3630bab` |
-| `improve-codebase-architecture` | `d02da163afa2ba2422433ba35ecae21659bef7d8bba5d2341ca1fa55573f7b3f` |
-| `pr` | `f9c3c04e7e0c1de5306da14ba729a7c77850da0216561269b4525526882c30a7` |
+| `improve-codebase-architecture` | `6309784c0b4631b92b2a2196da3ea5a500749fe5905c2981e34acf514da6820b` |
+| `pr` | `98d1dd6da6310b8d09b957005463c11b361c40354b5bbff48a7186cef3f0f4f2` |
 | `prototype` | `c4efd5e0f1c302b6225be83e8e42abdb05e13fde900484e4e2240e90b4e83eb6` |
 | `research` | `f2d6425b15cf3100d5c3eb4305a8e817174b8e5fa1fde6e06ad4b61321c32a60` |
 | `retro` | `09c4f9fe72fc5bc8e486a2bbb32dd785ca6264c56a53dd1bf9a334af72586efd` |
@@ -66,8 +67,8 @@ Hashes establish identity, not correctness or behavior.
 | `to-questionnaire` | `560491db9f48174ca9f7b5dd1444bc9c3cb7ac2d9e3e673e48289ef3221f164e` |
 | `to-spec` | `8064291406797497f30fc7e95bf08c60dda5754c680101fa6be0df34874ef9bd` |
 | `to-tickets` | `40d2d1c178ebd6585bb40268f9ab3be7859643f53db869643a68e210397078f9` |
-| `triage` | `40d36a83b7d09c053a12cc647fba2b1dd2af09f5f71551525eed907d90027147` |
-| `wait-what` | `cada4c3f805e0cb684b7ceb71ee78ce60bc8a93671a639785beb4025d4e78bea` |
+| `triage` | `4cf19b82804dd3c062a7f942900e6f9e89cfa5a77ccda3d84abf484f3115b50a` |
+| `wait-what` | `295f962a8ea63082292695d854215be32eca79ce1f8134dbf7c6f6bed2e2bab5` |
 | `wayfinder` | `62a0ab7262d40119da048328a71aeadaeaa21a4049ee9268d14500921bb6e257` |
 | `wizard` | `8fd93e38124bf81ad439231ba8af833b462ca9719c62373c87f25b06f6be776e` |
 | `writing-for-agents` | `dc53f07d1f662137317789b9b5d74cfcc26dbcfc15038a7faf676c844d8638e8` |
