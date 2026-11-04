@@ -60,7 +60,7 @@ Hashes establish identity, not correctness or behavior.
 | `prototype` | `c4efd5e0f1c302b6225be83e8e42abdb05e13fde900484e4e2240e90b4e83eb6` |
 | `research` | `f2d6425b15cf3100d5c3eb4305a8e817174b8e5fa1fde6e06ad4b61321c32a60` |
 | `retro` | `09c4f9fe72fc5bc8e486a2bbb32dd785ca6264c56a53dd1bf9a334af72586efd` |
-| `setup-matt-pocock-skills` | `6ec49fa7ec939e3da4ccee9af06a55f2652fef6092041fd9ca7b041dcc770dd5` |
+| `setup-matt-pocock-skills` | `256566df5faffc6781f16f2b08f3d4730bd5ab75755fe557b2083fe2dec49244` |
 | `ship` | `08e8761ba341013c6fd1c6ae87e9d9cd7f407fd40c64e3088fa62f3f2cef55da` |
 | `tdd` | `e262a6d42d7588c95df99c989c18151c0cab96a8d11a8a7cebf93bf43b2c280b` |
 | `teach` | `9aaf696786348313963552e446415c67fdd8129276b61f02be6dcedb208cd381` |

@@ -53,6 +53,8 @@ Write agent instructions, skills and tool descriptions in English.
 ```
 
 This changes future human-facing work; existing issues and reports keep their historical language.
+For a language-only rerun, limit the draft and writes to the Language block.
+Keep accepted tracker, labels, domain layout and other policies unchanged; skip their setup branches.
 Maintain both translations of this repository’s human guides when their meaning changes.
 
 
