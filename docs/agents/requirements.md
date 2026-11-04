@@ -20,17 +20,19 @@ Keep large ideas as proposals until concrete behavior is ready to specify.
 Maintain the human document pair when the agreed scope changes.
 Agent instructions own the operational rules; human process maps explain them.
 
-A change spec lives in its issue and records what was requested and why at that time.
+An issue, including a change spec, records what was requested and why at that time.
 After merge, preserve it unchanged as history; never edit it to describe later behavior.
+Keep proposed and implemented behavior distinct.
 
 In a project that adopts this harness, each question about current behavior has one owner:
 
 - Behavior: the project’s tests at agreed seams. Name each test by the behavior it checks.
-- Terms: `DOMAIN.md`.
-- Lasting decisions, constraints and deliberate non-goals: ADRs.
+- Terms and the rules inside their definitions: `DOMAIN.md`.
+- Decisions that meet the ADR criteria in `domain-modeling`, including deliberate non-goals: ADRs.
 
-Do not keep a separate prose document of current behavior.
-Record a lasting requirement that a test cannot check in an ADR.
+Such a project keeps current behavior in these sources only, without a separate prose document.
+A lasting requirement that a test cannot check goes into the `DOMAIN.md` definition it constrains or into a qualifying ADR.
+Otherwise its issue remains its record.
 
 ## When requirements change
 
