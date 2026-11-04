@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Personal Harness"
+  short_description: "Choose EN/RU and configure tracker and domain docs"
+policy:
+  allow_implicit_invocation: false
