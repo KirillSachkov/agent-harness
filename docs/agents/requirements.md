@@ -28,7 +28,7 @@ In a project that adopts this harness, each question about current behavior has 
 
 - Behavior: the project’s tests at agreed seams. Name each test by the behavior it checks.
 - Terms: `DOMAIN.md`.
-- Decisions that meet the ADR criteria in `domain-modeling`, including deliberate non-goals: ADRs.
+- Decisions that meet the [ADR criteria](../../.agents/skills/domain-modeling/ADR-FORMAT.md#when-to-offer-an-adr), including deliberate non-goals: ADRs.
 
 Such a project keeps current behavior in these sources only, without a separate prose document.
 A lasting requirement that a test cannot check goes into an ADR when it meets those criteria.
