@@ -4,7 +4,7 @@ description: "Turn the current conversation into a spec and publish it to the pr
 disable-model-invocation: true
 ---
 
-Read the requirements and human-participation pointers in root `AGENTS.md`. Apply its language rule to the published artifact and headings. Include preserved behavior and agreed human checkpoints. A change spec is not a current capability document, and publication does not start implementation.
+Read the requirements and human-participation pointers in root `AGENTS.md`. Apply its language rule to the published artifact and headings. Include preserved behavior and agreed human checkpoints. The spec is a snapshot of the decision, not a description of current behavior. Publication does not start implementation.
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 

@@ -27,6 +27,7 @@ If independent subagents are unavailable, report independent review as unavailab
 - Setup selects English or Russian human language and preserves existing settings and equivalent pointers.
 - Explanations and architecture reports follow that language. Tracker authorship precedes localized triage disclosures.
 - `ask-matt`, `to-spec`, `to-tickets` and diagnosis follow the same project authority.
+- `to-spec` calls the spec a snapshot of the decision, not a description of current behavior.
 
 ## Notices and updates
 
@@ -65,7 +66,7 @@ Hashes establish identity, not correctness or behavior.
 | `tdd` | `e262a6d42d7588c95df99c989c18151c0cab96a8d11a8a7cebf93bf43b2c280b` |
 | `teach` | `9aaf696786348313963552e446415c67fdd8129276b61f02be6dcedb208cd381` |
 | `to-questionnaire` | `560491db9f48174ca9f7b5dd1444bc9c3cb7ac2d9e3e673e48289ef3221f164e` |
-| `to-spec` | `8064291406797497f30fc7e95bf08c60dda5754c680101fa6be0df34874ef9bd` |
+| `to-spec` | `2fe2a769b9715ec55f44265df3e5bbf0c9e609f514bcde94292fa1af09630da7` |
 | `to-tickets` | `40d2d1c178ebd6585bb40268f9ab3be7859643f53db869643a68e210397078f9` |
 | `triage` | `4cf19b82804dd3c062a7f942900e6f9e89cfa5a77ccda3d84abf484f3115b50a` |
 | `wait-what` | `295f962a8ea63082292695d854215be32eca79ce1f8134dbf7c6f6bed2e2bab5` |
