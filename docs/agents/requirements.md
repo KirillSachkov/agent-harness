@@ -1,9 +1,8 @@
 # Requirements and change specifications
 
 Every implementation needs a GitHub issue before repository changes begin.
-State the problem, desired and preserved behavior, scope, acceptance criteria and verification.
-Read the issue’s comments and linked decisions before treating it as ready.
-Ask the owner when expected behavior is missing or contradictory.
+Read its comments and linked decisions when preparing the assignment.
+A readiness label alone does not make an issue ready.
 
 ## Choose the artifact
 
@@ -34,12 +33,13 @@ Such a project keeps current behavior in these sources only, without a separate 
 A lasting requirement that a test cannot check goes into an ADR when it meets those criteria.
 Otherwise its issue remains its record.
 
+A short issue records the problem, desired and preserved behavior, scope, acceptance criteria and verification.
+Use the `to-spec` template for full specs and [human participation](human-review.md) for acceptance planning.
+
 ## When requirements change
 
-Follow [human participation](human-review.md) for planned checks and acceptance.
-Before changing agreed behavior, show the semantic difference and obtain the owner’s decision.
+Before changing agreed behavior, show the semantic difference and follow [Ask the owner](human-review.md#ask-the-owner).
 Record the decision in the issue and update affected criteria, tickets, checks and implementation.
-Pause dependent work while the decision is missing; independent authorized work may continue.
 A passing test does not justify changing requirements to match the implementation.
 After merge, new desired behavior gets a new issue.
 The new issue links the earlier issue and names each criterion it replaces.

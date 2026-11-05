@@ -26,7 +26,8 @@ If independent subagents are unavailable, report independent review as unavailab
 - `ship` delivers through existing project testing/tracker contracts; it does not deploy or approve merge.
 - Setup selects English or Russian human language and preserves existing settings and equivalent pointers.
 - Explanations and architecture reports follow that language. Tracker authorship precedes localized triage disclosures.
-- `ask-matt`, `to-spec`, `to-tickets` and diagnosis follow the same project authority.
+- `ask-matt`, `to-spec` and `to-tickets` read project policy without redefining it; diagnosis follows the same authority.
+- Instruction ownership (#3): delivery criteria stay in the project guide and actions in `ship`. This change removes no upstream Matt text.
 - `to-spec` calls the spec a snapshot of the decision, not a description of current behavior.
 
 ## Notices and updates
@@ -45,7 +46,7 @@ Hashes establish identity, not correctness or behavior.
 
 | Skill | SHA-256 |
 | --- | --- |
-| `ask-matt` | `7aa43f43e29019b6f0f8b53e173a69237cdbcb6be6974e97a65a2ac734c14c75` |
+| `ask-matt` | `68e78cf855fe70134e993ad8c6329e2048176da5669892715ae008bb1766062a` |
 | `code-review` | `651145cbbce0a813dce3071e720b54009af4e54fdfe6ae06a79b48ac10281007` |
 | `codebase-design` | `5e680d83ed795dfdce570831c31c7e95927c3a3403a2f71006c8684f35472b84` |
 | `diagnosing-bugs` | `7f45fd315cf2ce923ff2208eb76d4ba3189f5e14b0b1ff33ff5256265ddd3bd9` |
@@ -62,12 +63,12 @@ Hashes establish identity, not correctness or behavior.
 | `research` | `f2d6425b15cf3100d5c3eb4305a8e817174b8e5fa1fde6e06ad4b61321c32a60` |
 | `retro` | `09c4f9fe72fc5bc8e486a2bbb32dd785ca6264c56a53dd1bf9a334af72586efd` |
 | `setup-matt-pocock-skills` | `256566df5faffc6781f16f2b08f3d4730bd5ab75755fe557b2083fe2dec49244` |
-| `ship` | `cdfb7a4990c33ac55b339d18b6b8ea9c7d9428527d4d3b875642ca1f8a40f304` |
+| `ship` | `ccf488249ff1cdd3db1189293f855faaa5b70a81e9ee74b4c882bc127f355099` |
 | `tdd` | `e262a6d42d7588c95df99c989c18151c0cab96a8d11a8a7cebf93bf43b2c280b` |
 | `teach` | `9aaf696786348313963552e446415c67fdd8129276b61f02be6dcedb208cd381` |
 | `to-questionnaire` | `560491db9f48174ca9f7b5dd1444bc9c3cb7ac2d9e3e673e48289ef3221f164e` |
-| `to-spec` | `2fe2a769b9715ec55f44265df3e5bbf0c9e609f514bcde94292fa1af09630da7` |
-| `to-tickets` | `40d2d1c178ebd6585bb40268f9ab3be7859643f53db869643a68e210397078f9` |
+| `to-spec` | `5ac906f65f8009a4ddb0b1851d7eb169b190b608f58aa7e8b40353c58b8b4196` |
+| `to-tickets` | `dc168c2ba857a8494423bbb88b39c48c0d325b8bb0e30021643731adf4c1b6b1` |
 | `triage` | `4cf19b82804dd3c062a7f942900e6f9e89cfa5a77ccda3d84abf484f3115b50a` |
 | `wait-what` | `295f962a8ea63082292695d854215be32eca79ce1f8134dbf7c6f6bed2e2bab5` |
 | `wayfinder` | `62a0ab7262d40119da048328a71aeadaeaa21a4049ee9268d14500921bb6e257` |

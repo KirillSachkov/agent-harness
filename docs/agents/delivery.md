@@ -9,9 +9,9 @@ The testing guide owns verification commands; the tracker guide owns GitHub oper
 Independent work targets `main`; a spec uses an integration branch for its tickets.
 Each implementation issue links to a PR. One integration PR may close several tickets.
 A discussion or research issue without repository changes may resolve with an answer.
-Open a small task’s draft after local checks and independent review.
-A spec opens its draft after the first integrated result; reuse it during delivery.
-Return material revisions to draft until their verification is complete.
+For a small task, the draft follows local checks and committed independent review.
+A spec's draft follows its first integrated result.
+A ready PR requires checks and review covering the current change.
 Keep issues open until delivery criteria are met, normally by merge.
 
 ## Verification evidence
@@ -27,8 +27,8 @@ Apply these rules to agent and human findings within the active assignment.
 After updating from the intended target, record a new immutable merge-base and review the complete resulting PR diff.
 Include relevant interactions and conflict resolutions; retain earlier reports and checked endpoints.
 New code or requirements need affected checks and review again.
-Wait for successful CI on the current PR result; older, pending or missing results do not count.
-Fix failures within the assignment or report the blocker.
+Delivery requires successful CI on the current PR result.
+Failures remain blockers until resolved.
 Report unrelated failures and propose a separate implementation rather than expanding the assignment.
 
 ## Acceptance and merge
