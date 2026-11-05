@@ -12,8 +12,10 @@ flowchart TD
     B --> C["Agent works in a dedicated worktree"]
     C --> D["Checks, commit and independent review"]
     D --> E["Corrections and their independent check when needed"]
-    E --> F["ship: PR and current CI"]
-    F --> G["Owner accepts; merge needs separate approval"]
+    E --> F["ship: PR, current CI, full SHA of the last PR commit"]
+    F --> G["Owner accepts the result"]
+    G --> H["Owner approves merge in the PR or a message"]
+    H --> I["Owner merges, or the agent records the approval and merges that commit"]
 ```
 
 ## Choose the route
@@ -78,7 +80,9 @@ Every PR still receives final owner acceptance even when no extra manual test is
 It creates or updates a draft, waits for current CI and hands the result to the owner.
 Small tasks open drafts after local checks and review; specs reuse their earlier draft.
 CI fixes stay within the assignment and receive affected checks and review.
-Acceptance and merge approval are separate; an agent’s authorized merge checks the approved head SHA.
+Acceptance and merge approval are separate.
+The owner may approve in the PR or in a message; the agent records the source and full SHA.
+An agent’s authorized merge checks that SHA; any new commit needs new approval.
 Worktrees separate files, not credentials or shared services.
 
 ## Develop the example

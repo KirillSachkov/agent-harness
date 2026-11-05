@@ -26,6 +26,7 @@ If independent subagents are unavailable, report independent review as unavailab
 - `ship` delivers through existing project testing/tracker contracts; it does not deploy or approve merge.
 - Setup selects English or Russian human language and preserves existing settings and equivalent pointers.
 - Explanations and architecture reports follow that language. Tracker authorship precedes localized triage disclosures.
+- `to-spec` keeps every upstream line; project rules sit in separate added lines.
 - `ask-matt`, `to-spec` and `to-tickets` read project policy without redefining it; diagnosis follows the same authority.
 - Instruction ownership (#3): delivery criteria stay in the project guide and actions in `ship`. This change removes no upstream Matt text.
 - `to-spec` calls the spec a snapshot of the decision, not a description of current behavior.
@@ -67,7 +68,7 @@ Hashes establish identity, not correctness or behavior.
 | `tdd` | `e262a6d42d7588c95df99c989c18151c0cab96a8d11a8a7cebf93bf43b2c280b` |
 | `teach` | `9aaf696786348313963552e446415c67fdd8129276b61f02be6dcedb208cd381` |
 | `to-questionnaire` | `560491db9f48174ca9f7b5dd1444bc9c3cb7ac2d9e3e673e48289ef3221f164e` |
-| `to-spec` | `5ac906f65f8009a4ddb0b1851d7eb169b190b608f58aa7e8b40353c58b8b4196` |
+| `to-spec` | `d87f3308bdbe6da158db9d986323e3d6217601a56577ffafc18fe75e8cdb669e` |
 | `to-tickets` | `dc168c2ba857a8494423bbb88b39c48c0d325b8bb0e30021643731adf4c1b6b1` |
 | `triage` | `4cf19b82804dd3c062a7f942900e6f9e89cfa5a77ccda3d84abf484f3115b50a` |
 | `wait-what` | `295f962a8ea63082292695d854215be32eca79ce1f8134dbf7c6f6bed2e2bab5` |
