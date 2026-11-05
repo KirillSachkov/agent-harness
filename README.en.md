@@ -24,7 +24,7 @@ README, process, scope, upstream maintenance and experiment guides have equal En
 3. Work in a dedicated worktree. Run applicable checks and independent Standards/Spec review.
 4. Correct defects and independently check the corrections.
 5. Use `ship` to prepare a PR, wait for current CI and hand the result to the owner.
-6. The owner accepts the result and separately authorizes merge of the checked head.
+6. The owner accepts the result and separately authorizes merge of the checked head, in the PR or in a message.
 
 [The process guide](docs/process.en.md) explains bugs, ideas, human checks and delivery.
 The authoritative agent rules live in [AGENTS.md](AGENTS.md) and its conditional references.

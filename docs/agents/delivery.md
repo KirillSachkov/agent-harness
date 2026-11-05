@@ -35,6 +35,7 @@ Report unrelated failures and propose a separate implementation rather than expa
 
 Every final PR goes to the owner for acceptance under [human participation](human-review.md).
 Merge requires the owner’s explicit approval of the delivered head; an agent records its source and full SHA.
+The owner may approve in the PR or in a message to the agent.
 Use `gh pr merge <number> --squash --match-head-commit <approved-sha>` for an authorized merge.
 A changed head needs renewed approval.
 Agent review, an implementation start and green CI do not independently grant merge permission.
