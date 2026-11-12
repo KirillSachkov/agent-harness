@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Доски проектирования</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #212529;
+        --muted: #495057;
+        --line: #dee2e6;
+        --paper: #f8f9fa;
+        --accent: #364fc7;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 16px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      main { max-width: 1280px; margin: 0 auto; padding: 40px 24px 80px; }
+      h1 { font-size: 34px; margin: 0 0 8px; }
+      h2 { font-size: 24px; margin: 0 0 6px; }
+      p { margin: 0 0 10px; max-width: 80ch; }
+      .muted { color: var(--muted); }
+      .notice {
+        margin: 18px 0 8px;
+        padding: 12px 16px;
+        border: 1px solid #ffd8a8;
+        background: #fff4e6;
+        border-radius: 8px;
+        max-width: 80ch;
+      }
+      .board { margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--line); }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 22px; }
+      a { color: var(--accent); }
+      .button {
+        display: inline-block;
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        text-decoration: none;
+        color: var(--ink);
+        background: #fff;
+      }
+      .button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .button:hover { border-color: var(--accent); }
+      .frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+      figure { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+      figure a.thumb { display: block; height: 190px; background: var(--paper); border-bottom: 1px solid var(--line); }
+      figure img { width: 100%; height: 100%; object-fit: contain; object-position: top left; padding: 10px; }
+      figcaption { display: flex; justify-content: space-between; gap: 10px; padding: 10px 12px; font-size: 14px; }
+      figcaption a { white-space: nowrap; }
+      footer { margin-top: 56px; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <main id="app"><p class="muted">Загрузка досок.</p></main>
+    <script type="module">
+      const data = await (await fetch("./boards.json?v=" + Date.now())).json();
+      const el = (tag, props = {}, children = []) => {
+        const node = Object.assign(document.createElement(tag), props);
+        for (const child of [].concat(children)) node.append(child);
+        return node;
+      };
+
+      const app = document.getElementById("app");
+      app.replaceChildren(
+        el("h1", { textContent: data.title }),
+        el("p", { className: "muted", textContent: data.about }),
+        el("p", { className: "notice", textContent: data.notice }),
+      );
+
+      for (const board of data.boards) {
+        const actions = el("div", { className: "actions" }, [
+          el("a", { className: "button primary", href: board.open, textContent: "Открыть доску" }),
+          ...board.links.map((link) => el("a", { className: "button", href: link.url, textContent: link.title })),
+        ]);
+        const frames = el(
+          "div",
+          { className: "frames" },
+          board.frames.map((frame) =>
+            el("figure", {}, [
+              el("a", { className: "thumb", href: frame.file, target: "_blank", title: "Открыть картинку целиком" }, [
+                el("img", { src: frame.file, alt: frame.title, loading: "lazy" }),
+              ]),
+              el("figcaption", {}, [
+                el("span", { textContent: frame.title }),
+                el("a", { href: frame.file, download: "", textContent: "Скачать" }),
+              ]),
+            ]),
+          ),
+        );
+        app.append(
+          el("section", { className: "board" }, [
+            el("h2", { textContent: board.title }),
+            el("p", { textContent: board.about }),
+            el("p", { className: "muted", textContent: board.status }),
+            actions,
+            frames,
+          ]),
+        );
+      }
+
+      app.append(
+        el("footer", { className: "muted" }, [
+          el("p", {
+            textContent:
+              "Картинка кадра хранит доску внутри себя. Скачай файл и открой его на excalidraw.com: получится доска, которую можно править.",
+          }),
+        ]),
+      );
+    </script>
+  </body>
+</html>

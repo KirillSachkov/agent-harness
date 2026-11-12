@@ -1,0 +1,44 @@
+{
+  "title": "Доски проектирования",
+  "about": "Здесь собраны доски, на которых мы обсуждали устройство платформы. Доска показывает снимок решения на свою дату и после реализации не обновляется.",
+  "notice": "Доски сделаны для людей. Требования и текущее поведение записаны в спецификациях, GLOSSARY.md, ADR и тестах.",
+  "boards": [
+    {
+      "title": "Спецификация #48. Поведение домена",
+      "about": "Как идут процессы подключения сотрудника и агента к проекту, какие в них правила, жизненные циклы, спорные случаи и открытые вопросы.",
+      "status": "Снимок на 12 ноября 2026 года. Решения приняты владельцем в задаче #52.",
+      "open": "spec48-domain-board/",
+      "links": [
+        { "title": "Спецификация #48", "url": "https://github.com/KirillSachkov/ai-first-platform/issues/48" },
+        { "title": "Задача #52 с итогом", "url": "https://github.com/KirillSachkov/ai-first-platform/issues/52" }
+      ],
+      "frames": [
+        { "title": "О доске", "file": "spec48-domain-board/snapshots/domain/00-about.png" },
+        { "title": "Легенда", "file": "spec48-domain-board/snapshots/domain/01-legend.png" },
+        { "title": "Открытые вопросы", "file": "spec48-domain-board/snapshots/domain/02-open-questions.png" },
+        { "title": "Блок 1. Приглашение и присоединение", "file": "spec48-domain-board/snapshots/domain/03-block-1-invitation.png" },
+        { "title": "Жизненный цикл: приглашение", "file": "spec48-domain-board/snapshots/domain/04-lifecycle-invitation.png" },
+        { "title": "Блок 2. Проекты и участие", "file": "spec48-domain-board/snapshots/domain/05-block-2-projects.png" },
+        { "title": "Блок 3. Подключение агента", "file": "spec48-domain-board/snapshots/domain/06-block-3-agent-connection.png" },
+        { "title": "Жизненный цикл: подключение агента", "file": "spec48-domain-board/snapshots/domain/07-lifecycle-agent-connection.png" },
+        { "title": "Блок 4. Отзыв и восстановление доступа", "file": "spec48-domain-board/snapshots/domain/08-block-4-access.png" },
+        { "title": "Жизненный цикл: учётная запись", "file": "spec48-domain-board/snapshots/domain/09-lifecycle-account.png" },
+        { "title": "Примеры: спорные случаи", "file": "spec48-domain-board/snapshots/domain/10-examples.png" }
+      ]
+    },
+    {
+      "title": "Спецификация #48. Техническая доска",
+      "about": "Что уже задано принятыми ADR: кто владеет данными, кто кого вызывает, какие события идут между модулями и в каком порядке Edge проверяет запрос.",
+      "status": "Черновик на 12 ноября 2026 года. Вход для задачи #56, новых решений на доске нет.",
+      "open": "spec48-domain-board/?scene=./technical.scene.js",
+      "links": [
+        { "title": "Задача #56", "url": "https://github.com/KirillSachkov/ai-first-platform/issues/56" }
+      ],
+      "frames": [
+        { "title": "О доске", "file": "spec48-domain-board/snapshots/technical/00-about.png" },
+        { "title": "Карта модулей", "file": "spec48-domain-board/snapshots/technical/01-module-map.png" },
+        { "title": "Чтение контекста проекта", "file": "spec48-domain-board/snapshots/technical/02-context-reading.png" }
+      ]
+    }
+  ]
+}

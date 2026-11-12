@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Доска</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.0.0",
+          "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime",
+          "react-dom": "https://esm.sh/react-dom@19.0.0",
+          "react-dom/client": "https://esm.sh/react-dom@19.0.0/client"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="https://esm.sh/@excalidraw/excalidraw@0.18.1/dist/prod/index.css" />
+    <script>
+      window.EXCALIDRAW_ASSET_PATH = "https://esm.sh/@excalidraw/excalidraw@0.18.1/dist/prod/";
+    </script>
+    <style>
+      html, body, #app { margin: 0; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import * as Ex from "https://esm.sh/@excalidraw/excalidraw@0.18.1/dist/prod/index.js?external=react,react-dom";
+      const stamp = Date.now();
+      const { createKit } = await import("./kit.js?v=" + stamp);
+      // The scene is chosen by ?scene=<path>; without it the page shows the bundled example.
+      const scenePath = new URLSearchParams(location.search).get("scene") ?? "./examples/spec48/scene.js";
+      const { build } = await import(scenePath + "?v=" + stamp);
+      const skeleton = build(createKit());
+
+      const elements = Ex.convertToExcalidrawElements(skeleton, { regenerateIds: false });
+      // Bound labels belong to the same frame and group as their container.
+      const byId = new Map(elements.map((el) => [el.id, el]));
+      for (const el of elements) {
+        if (el.type === "text" && el.containerId && byId.has(el.containerId)) {
+          const container = byId.get(el.containerId);
+          el.frameId = container.frameId ?? null;
+          el.groupIds = [...container.groupIds];
+        }
+      }
+      const App = () =>
+        React.createElement(Ex.Excalidraw, {
+          langCode: "ru-RU",
+          excalidrawAPI: (api) => {
+            window.__api = api;
+            // Open on the legend and the module map at a readable zoom; the whole board is too tall to fit.
+            const top = Math.min(...elements.map((el) => el.y));
+            const firstScreen = elements.filter((el) => el.y < top + 1340);
+            setTimeout(() => api.scrollToContent(firstScreen, { fitToViewport: true, viewportZoomFactor: 0.95 }), 300);
+          },
+          initialData: {
+            elements,
+            appState: { viewBackgroundColor: "#ffffff", currentItemFontFamily: 2, frameRendering: { enabled: true, name: false, outline: true, clip: false } },
+          },
+        });
+      createRoot(document.getElementById("app")).render(React.createElement(App));
+
+      // Exports one frame, or everything outside frames when no name is given, as a PNG with the scene inside.
+      // The file opens back in Excalidraw as an editable board. Returns the PNG as base64.
+      window.__exportFrame = async (frameName) => {
+        const all = window.__api.getSceneElements();
+        const frame = frameName ? all.find((el) => el.type === "frame" && el.name === frameName) : null;
+        if (frameName && !frame) throw new Error("No frame named " + frameName);
+        const picked = all.filter((el) => (frame ? el.frameId === frame.id : !el.frameId && el.type !== "frame"));
+        const blob = await Ex.exportToBlob({
+          elements: picked,
+          appState: { exportBackground: true, viewBackgroundColor: "#ffffff", exportEmbedScene: true },
+          files: window.__api.getFiles(),
+          exportPadding: 24,
+          mimeType: "image/png",
+          getDimensions: (width, height) => ({ width: width * 1.5, height: height * 1.5, scale: 1.5 }),
+        });
+        const bytes = new Uint8Array(await blob.arrayBuffer());
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+        return btoa(binary);
+      };
+      window.__boardReady = true;
+    </script>
+  </body>
