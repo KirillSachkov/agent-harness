@@ -11,7 +11,7 @@ Spec #48 was written and confirmed on 6 November, before design. Then the Wayfin
 ## What worked
 
 - The decision chain held: a question in a map issue, the owner's answer in conversation, the issue's outcome comment, a link from the map and from the spec. Every decision in the outcomes has a confirming message from the owner.
-- Step-by-step process modelling with examples for disputed rules produced 30 steps and 34 cases that will become tests.
+- Step-by-step process modelling with examples for disputed rules produced 30 steps and 34 cases in the #52 outcome.
 - The separate domain model document was removed: terms went to the glossary, hard decisions to ADRs, requirements to issues. The board stayed a snapshot for people.
 
 ## Where things were lost

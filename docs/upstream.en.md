@@ -14,7 +14,7 @@ Clients do not discover skills there; they read `.agents/skills`.
 
 Show our adaptations: `python3 scripts/upstream.py diff`, or `python3 scripts/upstream.py diff --stat` for a summary, optionally with skill names.
 
-When we rename a borrowed skill, an `upstream-name: local-name` line in `.agents/upstream/mattpocock/RENAMES` links it to the original. The file is ours and is not part of the copy's hash. `diff` and `update` use it to find the local directory, and `check.py` verifies that directory exists. It currently holds one line: `ask-matt: ask`.
+When we rename a borrowed skill, an `upstream-name: local-name` line in `.agents/upstream/mattpocock/RENAMES` links it to the original. The file is ours and is not part of the copy's hash. `diff` and `update` use it to find the local directory, and `check.py` verifies that the upstream skill and the local directory both exist.
 
 ## Select an update
 

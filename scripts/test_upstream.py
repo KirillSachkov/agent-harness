@@ -138,6 +138,19 @@ class Update(unittest.TestCase):
             self.assertTrue((root / ".agents/upstream/mattpocock/RENAMES").is_file())
 
 
+class Pairs(unittest.TestCase):
+    def test_renamed_skill_pairs_with_its_upstream_original_by_either_name(self) -> None:
+        expected = [(Path(".agents/upstream/mattpocock/skills/engineering/ask-matt"), Path(".agents/skills/ask"))]
+        self.assertEqual(upstream.pairs(ROOT, ["ask"]), expected)
+        self.assertEqual(upstream.pairs(ROOT, ["ask-matt"]), expected)
+
+    def test_unrenamed_skill_pairs_by_its_own_name(self) -> None:
+        self.assertEqual(
+            upstream.pairs(ROOT, ["grilling"]),
+            [(Path(".agents/upstream/mattpocock/skills/productivity/grilling"), Path(".agents/skills/grilling"))],
+        )
+
+
 class CheckUpstreamCopy(unittest.TestCase):
     def errors(self, change) -> list[str]:
         with tempfile.TemporaryDirectory() as temporary:
@@ -179,6 +192,13 @@ class CheckUpstreamCopy(unittest.TestCase):
             ".agents/upstream/mattpocock/skills/productivity/grilling: no local skill with this name",
             self.errors(rename),
         )
+
+    def test_rename_of_unknown_upstream_skill_fails(self) -> None:
+        def rename(copy: Path) -> None:
+            renames = copy / ".agents/upstream/mattpocock/RENAMES"
+            renames.write_text(renames.read_text() + "gone: grilling\n")
+
+        self.assertIn(".agents/upstream/mattpocock/RENAMES: gone is not a borrowed skill", self.errors(rename))
 
     def test_snapshot_link_naming_another_revision_fails(self) -> None:
         def repin(copy: Path) -> None:

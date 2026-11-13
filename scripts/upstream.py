@@ -48,16 +48,24 @@ def same(left: Path, right: Path) -> bool:
     return filecmp.cmp(left, right, shallow=False)
 
 
-def diff(root: Path, names: list[str], stat: bool) -> int:
+def pairs(root: Path, names: list[str]) -> list[tuple[Path, Path]]:
+    """Pair each named skill (upstream or local name; all when empty) as (pristine copy, local copy)."""
     upstream = borrowed(root / UPSTREAM / "skills")
     local = local_names(root)
     upstream_name = {name: original for original, name in local.items()}
+    result = []
     for name in names or sorted(upstream):
         name = upstream_name.get(name, name)
         if name not in upstream:
             raise SystemExit(f"{name} is not a borrowed skill")
-        command = ["git", "diff", "--no-index"] + (["--stat"] if stat else [])
-        subprocess.run(command + [upstream[name].relative_to(root), LOCAL / local.get(name, name)], cwd=root)
+        result.append((upstream[name].relative_to(root), LOCAL / local.get(name, name)))
+    return result
+
+
+def diff(root: Path, names: list[str], stat: bool) -> int:
+    command = ["git", "diff", "--no-index"] + (["--stat"] if stat else [])
+    for pristine, local in pairs(root, names):
+        subprocess.run(command + [pristine, local], cwd=root)
     return 0
 
 

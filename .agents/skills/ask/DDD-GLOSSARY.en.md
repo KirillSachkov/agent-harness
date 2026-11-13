@@ -84,10 +84,10 @@ EventStorming has three formats (B). See the [practice menu](PRACTICES.en.md#eve
 | Big Picture | Exploring the whole area as one event timeline. Brandolini describes a full in-person day with 15–30 people (B) | A new or tangled area with many roles. An owner working with an agent uses a lightweight event timeline instead |
 | Process Modelling | One process, walked through with the colour grammar (B, DC) | A process with actors, failure branches and rules |
 | Software Design | Designing behaviour inside one context, down to code (B, DC) | Complex core logic |
-| Domain event | What happened, in past tense. The backbone of the model | All formats |
-| Command | What an actor or system decided to do | Process Modelling and later |
-| Actor | A role that makes a decision | All formats |
-| System | An external or internal system involved | All formats |
+| Domain event | What happened, in past tense. The backbone of the model (B) | All formats |
+| Command | What an actor or system decided to do (DC) | Process Modelling and later |
+| Actor | A role that makes a decision (DC) | All formats |
+| System | An external or internal system involved (DC) | All formats |
 | Policy | "Whenever X, then Y". Manual ("a manager reviews the request") or automatic (DC, B) | Process Modelling |
 | Read model | The information an actor uses to decide (DC) | Process Modelling |
 | Constraint | What accepts or rejects a command, and the rule it guards. Formerly called the aggregate. Start from behaviour and name it later (DC, B) | Software Design |

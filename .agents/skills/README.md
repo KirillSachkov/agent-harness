@@ -31,7 +31,7 @@ If independent subagents are unavailable, report independent review as unavailab
 - `ask`, `to-spec` and `to-tickets` read project policy without redefining it; diagnosis follows the same authority.
 - Instruction ownership (#3): delivery criteria stay in the project guide and actions in `ship`. This change removes no upstream Matt text.
 - `to-spec` calls the spec a snapshot of the decision, not a description of current behavior.
-- `ask` is Matt's `ask-matt`, renamed through `.agents/upstream/mattpocock/RENAMES` (#14). It advises as a colleague, with reasons and when to depart, and adds design references with Russian twins: work size and shape, design order, practice menu, DDD and EventStorming glossary, and the ai-first-platform#48 case.
+- `ask` is Matt's `ask-matt`, renamed through `.agents/upstream/mattpocock/RENAMES` (#14), with a new title, description and native display name. It keeps Matt's flow map and phase boundaries, advises as a colleague, with reasons and when to depart, and adds design references with Russian twins: work size and shape, design order, practice menu, DDD and EventStorming glossary, and the ai-first-platform#48 case.
 - `domain-modeling` offers a practice in one sentence when the conversation shows its signs, writes a walkthrough's outcome as text and offers a board only on request or for long text (#13).
 
 ## Notices and updates
@@ -49,7 +49,7 @@ Hashes establish identity, not correctness or behavior.
 
 | Skill | SHA-256 |
 | --- | --- |
-| `ask` | `556e17f39823a5952387ae7ce9a620ecd8116d4f671a3007be7b7e2d10da36d3` |
+| `ask` | `39da797bd4f3cc2edb9a5efebabcd2953b13769c8b26363a47d3c22b35c42a79` |
 | `code-review` | `651145cbbce0a813dce3071e720b54009af4e54fdfe6ae06a79b48ac10281007` |
 | `codebase-design` | `5e680d83ed795dfdce570831c31c7e95927c3a3403a2f71006c8684f35472b84` |
 | `diagnosing-bugs` | `7f45fd315cf2ce923ff2208eb76d4ba3189f5e14b0b1ff33ff5256265ddd3bd9` |

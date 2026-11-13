@@ -50,7 +50,7 @@ Questions that usually come up around steps 1–3 of the main flow. Read the lin
 - **Size and shape.** One spec covers one capability that is accepted as one result; work that fits one session needs a short issue, not a spec. A new product starts with a product document (problem, goals, first-version slice) plus language and boundaries, then one spec per capability. Bugs, refactors, migrations, integrations and technical changes each have their own shape: [WORK-SHAPES.en.md](WORK-SHAPES.en.md).
 - **Design order.** Behaviour, quality, technical shape, unknowns, then `/to-spec`: the spec is the outcome of design. A spec that is ready but technically unthought gets its key scenarios walked through the modules, and the decisions go back into the spec. A `/wayfinder` map ends with one `/to-spec` that consolidates its decisions: [DESIGN-ORDER.en.md](DESIGN-ORDER.en.md), and the [case behind it](CASE-SPEC48.en.md).
 - **Practices.** Name the blocking question first, then pick the practice. Signs that one pays off: several actors or modules, failure branches, states, a word with two meanings. A small feature needs rules and two or three examples, not EventStorming. When each practice helps and when it does not: [PRACTICES.en.md](PRACTICES.en.md); terms: [DDD-GLOSSARY.en.md](DDD-GLOSSARY.en.md).
-- **Boards.** Offer one when the user asks to see it or the text has grown too long to follow. The decision still lives in text.
+- **Boards.** When a board helps, which view answers which question, and when to offer one: [PRACTICES.en.md](PRACTICES.en.md#boards).
 
 ## On-ramps
 

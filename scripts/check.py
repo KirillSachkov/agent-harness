@@ -69,6 +69,9 @@ def check_upstream(root: Path, skills: Path) -> list[str]:
     if not (upstream / "skills").is_dir() or identity(upstream / "skills") != source.get("sha256"):
         errors.append(f"{UPSTREAM}: pristine copy differs from SOURCE; never edit it by hand")
     names = local_names(root)
+    borrowed = {directory.name for directory in (upstream / "skills").glob("*/*")}
+    for name in sorted(set(names) - borrowed):
+        errors.append(f"{UPSTREAM}/RENAMES: {name} is not a borrowed skill")
     for directory in sorted((upstream / "skills").glob("*/*")):
         if not (skills / names.get(directory.name, directory.name) / "SKILL.md").is_file():
             errors.append(f"{directory.relative_to(root)}: no local skill with this name")
