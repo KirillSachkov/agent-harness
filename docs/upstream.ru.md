@@ -14,6 +14,8 @@
 
 Посмотреть наши адаптации: `python3 scripts/upstream.py diff`, кратко `python3 scripts/upstream.py diff --stat`, при желании с именами skills.
 
+Если мы переименовали заимствованный skill, строка `имя-upstream: локальное-имя` в `.agents/upstream/mattpocock/RENAMES` связывает его с оригиналом. Этот файл наш, он не входит в хэш копии. По нему `diff` и `update` находят локальную папку, а `check.py` проверяет, что есть и skill в upstream, и локальная папка.
+
 ## Выбор обновления
 
 1. Создайте issue: изменение upstream, ожидаемая польза, границы и проверки.

@@ -89,29 +89,35 @@ class MergeSkill(unittest.TestCase):
 
 
 class Update(unittest.TestCase):
+    def update(self, base: Path, local_name: str) -> tuple[int, Path, str]:
+        """Merge a new upstream revision of `skill` into the local copy named `local_name`."""
+        source = base / "source"
+        write(source / "skills/group/skill/SKILL.md", BASE)
+        git(source, "init", "-q")
+        git(source, "add", ".")
+        git(source, "commit", "-qm", "old")
+        old_revision = git(source, "rev-parse", "HEAD")
+        write(source / "skills/group/skill/SKILL.md", BASE.replace("end", "end, improved upstream"))
+        git(source, "commit", "-qam", "new")
+        new_revision = git(source, "rev-parse", "HEAD")
+
+        root = base / "root"
+        write(root / ".agents/upstream/mattpocock/skills/group/skill/SKILL.md", BASE)
+        upstream.write_source(root, old_revision, "2026-01-01")
+        if local_name != "skill":
+            write(root / ".agents/upstream/mattpocock/RENAMES", f"# upstream: local\nskill: {local_name}\n")
+        write(root / f".agents/skills/{local_name}/SKILL.md", BASE.replace("intro", "intro\nlocal rule"))
+        git(root, "init", "-q")
+        git(root, "add", ".")
+        git(root, "commit", "-qm", "root")
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            code = upstream.main(["update", new_revision, "--repository", str(source)], root)
+        return code, root, new_revision
+
     def test_update_merges_new_revision_and_records_it(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            base = Path(temporary)
-            source = base / "source"
-            write(source / "skills/group/skill/SKILL.md", BASE)
-            git(source, "init", "-q")
-            git(source, "add", ".")
-            git(source, "commit", "-qm", "old")
-            old_revision = git(source, "rev-parse", "HEAD")
-            write(source / "skills/group/skill/SKILL.md", BASE.replace("end", "end, improved upstream"))
-            git(source, "commit", "-qam", "new")
-            new_revision = git(source, "rev-parse", "HEAD")
-
-            root = base / "root"
-            write(root / ".agents/upstream/mattpocock/skills/group/skill/SKILL.md", BASE)
-            upstream.write_source(root, old_revision, "2026-01-01")
-            write(root / ".agents/skills/skill/SKILL.md", BASE.replace("intro", "intro\nlocal rule"))
-            git(root, "init", "-q")
-            git(root, "add", ".")
-            git(root, "commit", "-qm", "root")
-
-            with contextlib.redirect_stdout(io.StringIO()):
-                code = upstream.main(["update", new_revision, "--repository", str(source)], root)
+            code, root, new_revision = self.update(Path(temporary), "skill")
 
             self.assertEqual(code, 0)
             self.assertIn("local rule", (root / ".agents/skills/skill/SKILL.md").read_text())
@@ -119,6 +125,30 @@ class Update(unittest.TestCase):
             source_file = upstream.read_source(root)
             self.assertEqual(source_file["revision"], new_revision)
             self.assertEqual(source_file["sha256"], check.identity(root / ".agents/upstream/mattpocock/skills"))
+
+    def test_update_merges_into_renamed_local_skill(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            code, root, _ = self.update(Path(temporary), "renamed")
+
+            self.assertEqual(code, 0)
+            merged = (root / ".agents/skills/renamed/SKILL.md").read_text()
+            self.assertIn("local rule", merged)
+            self.assertIn("improved upstream", merged)
+            self.assertFalse((root / ".agents/skills/skill").exists())
+            self.assertTrue((root / ".agents/upstream/mattpocock/RENAMES").is_file())
+
+
+class Pairs(unittest.TestCase):
+    def test_renamed_skill_pairs_with_its_upstream_original_by_either_name(self) -> None:
+        expected = [(Path(".agents/upstream/mattpocock/skills/engineering/ask-matt"), Path(".agents/skills/ask"))]
+        self.assertEqual(upstream.pairs(ROOT, ["ask"]), expected)
+        self.assertEqual(upstream.pairs(ROOT, ["ask-matt"]), expected)
+
+    def test_unrenamed_skill_pairs_by_its_own_name(self) -> None:
+        self.assertEqual(
+            upstream.pairs(ROOT, ["grilling"]),
+            [(Path(".agents/upstream/mattpocock/skills/productivity/grilling"), Path(".agents/skills/grilling"))],
+        )
 
 
 class CheckUpstreamCopy(unittest.TestCase):
@@ -152,6 +182,23 @@ class CheckUpstreamCopy(unittest.TestCase):
             ".agents/upstream/mattpocock/skills/productivity/grilling: no local skill with this name",
             self.errors(remove),
         )
+
+    def test_rename_to_missing_local_skill_fails(self) -> None:
+        def rename(copy: Path) -> None:
+            renames = copy / ".agents/upstream/mattpocock/RENAMES"
+            renames.write_text(renames.read_text() + "grilling: no-such-skill\n")
+
+        self.assertIn(
+            ".agents/upstream/mattpocock/skills/productivity/grilling: no local skill with this name",
+            self.errors(rename),
+        )
+
+    def test_rename_of_unknown_upstream_skill_fails(self) -> None:
+        def rename(copy: Path) -> None:
+            renames = copy / ".agents/upstream/mattpocock/RENAMES"
+            renames.write_text(renames.read_text() + "gone: grilling\n")
+
+        self.assertIn(".agents/upstream/mattpocock/RENAMES: gone is not a borrowed skill", self.errors(rename))
 
     def test_snapshot_link_naming_another_revision_fails(self) -> None:
         def repin(copy: Path) -> None:

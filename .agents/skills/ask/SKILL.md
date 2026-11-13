@@ -1,12 +1,14 @@
 ---
-name: ask-matt
-description: Ask which skill or flow fits your situation. A router over the skills in this repo.
+name: ask
+description: Ask where you are and how best to proceed: which skill or flow fits, what size and shape the work needs, in which order to design, and when DDD, EventStorming or a board helps.
 disable-model-invocation: true
 ---
 
-# Ask Matt
+# Ask
 
-Before advising a route, read root `AGENTS.md` and its preparation pointers for project policy.
+Before advising a route, read root `AGENTS.md` and its preparation pointers for project policy. Where advice here differs from project policy, the policy wins.
+
+Answer like an experienced colleague: give the advice, the reason for it, and when it makes sense to depart from it. Advice is not a mandatory step or a template; the user decides.
 
 You don't remember every skill, so ask.
 
@@ -17,6 +19,8 @@ A **flow** is a path through the skills. Most paths run along one **main flow**,
 ## The main flow: idea → ship
 
 The route most work travels. You have an idea and want it built.
+
+Work that fits one session needs only a short conversation and a short issue; the full `/grill-with-docs` interview is optional there.
 
 1. **`/grill-with-docs`** sharpens the idea by interview. Start here whenever you are **working in a working directory**: it's stateful, retaining what it learns in `DOMAIN.md` and ADRs. (No working directory? Use `/grill-me` instead, covered under Standalone. Both run the same `/grilling` primitive; `grill-with-docs` is the one that leaves a paper trail, which makes it the better of the two whenever a repo is there to leave it in.)
 2. **Branch: can you settle every question in conversation?** If a question needs a runnable answer (state, business logic, a UI you have to see), detour through a prototype, bridged by **`/handoff`** in both directions (a prototype lives in its own directory, which is exactly what `/handoff` is for; see Phase boundaries):
@@ -29,7 +33,7 @@ The route most work travels. You have an idea and want it built.
      - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph**, runs implementer subagents across the ready **frontier** in parallel, and lands everything on one **integration branch**. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
    - **No** → **`/implement`** right here, in the same context window.
 
-   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a two-axis review (Standards + Spec) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
+   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a two-axis review (Standards + Spec) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point. After review, **`/ship`** delivers the branch as a verified PR for owner acceptance.
 
    When the work goes up as a pull request, **`/pr`** shapes the body: the smallest visual that shows the change, before/after evidence that it works, and a one-way or two-way door call. It's model-invoked, so the agent reaches for it whenever it writes a PR.
 
@@ -40,6 +44,15 @@ The route most work travels. You have an idea and want it built.
 Keep steps 1–3 in **one unbroken context window** (don't compact or clear until after `/to-tickets`) so the grilling, spec, and tickets all build on the same thinking. Each `/implement` then starts fresh, working from the ticket. Run `/retro` in the session it's looking back on, before you clear; after clearing, point it at that session's log instead.
 
 The limit on this is the **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**: the window (~150k tokens on state-of-the-art models) within which the model still reasons sharply. If a session approaches it before `/to-tickets`, don't push on degraded; `/compact` at the nearest phase boundary and carry on (see Phase boundaries).
+
+## Before the spec: size, order and practices
+
+Questions that usually come up around steps 1–3 of the main flow. Read the linked reference before advising on them: it carries the reasons, the cases and the sources. Each reference has a Russian twin (`*.ru.md`) for the user to read.
+
+- **Size and shape.** One spec covers one capability that is accepted as one result; work that fits one session needs a short issue, not a spec. A new product starts with a product document (problem, goals, first-version slice) plus language and boundaries, then one spec per capability. Bugs, refactors, migrations, integrations and technical changes each have their own shape: [WORK-SHAPES.en.md](WORK-SHAPES.en.md).
+- **Design order.** Behaviour, quality, technical shape, unknowns, then `/to-spec`: the spec is the outcome of design. A spec that is ready but technically unthought gets its key scenarios walked through the modules, and the decisions go back into the spec, either in the earlier issue's body or as a new issue that links the earlier one and lists the criteria it replaces; the user chooses. A `/wayfinder` map ends with one `/to-spec` that consolidates its decisions: [DESIGN-ORDER.en.md](DESIGN-ORDER.en.md), and the [case behind it](CASE-SPEC48.en.md).
+- **Practices.** Name the blocking question first, then pick the practice. Signs that one pays off: several actors or modules, failure branches, states, a word with two meanings. A small feature needs rules and two or three examples, not EventStorming. When each practice helps and when it does not: [PRACTICES.en.md](PRACTICES.en.md); terms: [DDD-GLOSSARY.en.md](DDD-GLOSSARY.en.md).
+- **Boards.** When a board helps, which view answers which question, and when to offer one: [PRACTICES.en.md](PRACTICES.en.md#boards).
 
 ## On-ramps
 

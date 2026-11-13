@@ -1,0 +1,3 @@
+# Borrowed skills renamed locally, as `upstream-name: local-name`.
+# scripts/upstream.py and scripts/check.py read this file.
+ask-matt: ask

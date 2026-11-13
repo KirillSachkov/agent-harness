@@ -13,7 +13,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from check import UPSTREAM, identity, read_source
+from check import UPSTREAM, identity, local_names, read_source
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL = Path(".agents/skills")
@@ -48,13 +48,24 @@ def same(left: Path, right: Path) -> bool:
     return filecmp.cmp(left, right, shallow=False)
 
 
-def diff(root: Path, names: list[str], stat: bool) -> int:
+def pairs(root: Path, names: list[str]) -> list[tuple[Path, Path]]:
+    """Pair each named skill (upstream or local name; all when empty) as (pristine copy, local copy)."""
     upstream = borrowed(root / UPSTREAM / "skills")
+    local = local_names(root)
+    upstream_name = {name: original for original, name in local.items()}
+    result = []
     for name in names or sorted(upstream):
+        name = upstream_name.get(name, name)
         if name not in upstream:
             raise SystemExit(f"{name} is not a borrowed skill")
-        command = ["git", "diff", "--no-index"] + (["--stat"] if stat else [])
-        subprocess.run(command + [upstream[name].relative_to(root), LOCAL / name], cwd=root)
+        result.append((upstream[name].relative_to(root), LOCAL / local.get(name, name)))
+    return result
+
+
+def diff(root: Path, names: list[str], stat: bool) -> int:
+    command = ["git", "diff", "--no-index"] + (["--stat"] if stat else [])
+    for pristine, local in pairs(root, names):
+        subprocess.run(command + [pristine, local], cwd=root)
     return 0
 
 
@@ -98,9 +109,9 @@ def update(root: Path, checkout: Path, revision: str, date: str) -> list[str]:
     missing = sorted(set(old) - set(new))
     if missing:
         raise SystemExit(f"skills missing upstream, nothing changed: {', '.join(missing)}")
-    problems = []
+    problems, local = [], local_names(root)
     for name in sorted(old):
-        problems += merge_skill(old[name], new[name], root / LOCAL / name)
+        problems += merge_skill(old[name], new[name], root / LOCAL / local.get(name, name))
     shutil.rmtree(root / UPSTREAM / "skills")
     for name in sorted(old):
         shutil.copytree(new[name], root / UPSTREAM / "skills" / new[name].relative_to(checkout / "skills"))
