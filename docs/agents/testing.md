@@ -1,17 +1,18 @@
 # Verification
 
-This repository currently contains Markdown, skill metadata, client pointers and a small structural checker.
+This repository currently contains Markdown, skill metadata, client pointers, a structural checker and an upstream merge script.
 It has no product runtime, application tests or live-agent evaluation suite.
 
 ## Commands
 
 Run from the repository root:
 
-- `python3 scripts/check.py`: local Markdown links/anchors, skill identity and invocation metadata, directory hashes and client pointers.
+- `python3 scripts/check.py`: local Markdown links/anchors, skill identity and invocation metadata, directory hashes, the pristine upstream copy and client pointers.
+- `python3 -m unittest discover -s scripts`: regression tests for `scripts/upstream.py` and the upstream checks.
 - `git diff --check`: whitespace errors in the change.
 
-Before a PR, run both commands and report their actual results.
-CI runs the structural checker and whitespace check on the PR result.
+Before a PR, run all three commands and report their actual results.
+CI runs the same three checks on the PR result.
 `harness-check` is the job name; repository protection settings are not implied by its existence.
 
 ## Appropriate evidence
