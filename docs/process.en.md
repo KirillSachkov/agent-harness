@@ -37,7 +37,8 @@ Before proposing to start an issue, the agent checks that it is still open.
 
 All agents work under the owner’s GitHub account, so Assignees cannot tell one session from another.
 Before starting, a session looks for open PRs, branches and worktrees for the issue; in Orca, also for workspaces and agents linked to it.
-It links its worktree to the issue: the issue number goes into the branch name, and in Orca also into the worktree’s metadata. If another session is already active, it asks the owner.
+If another session is already active, it asks the owner.
+It links its worktree to the issue: a new branch carries the issue number, and in Orca the worktree’s metadata names the issue.
 A scope change for started work goes into the issue and to the session doing it; a reply in a conversation alone does not change scope.
 An agent writes “by the owner’s decision” only with a quote of the owner’s message. Otherwise it says that the agent decided and why.
 Approval relayed by another agent is recorded with its chain: where and when the owner answered, who relayed it, and which commit it covers.

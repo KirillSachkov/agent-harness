@@ -16,7 +16,7 @@ A reviewer that writes artifacts inside the repository needs a separate copy.
 4. Otherwise, base independent work on fetched `origin/main` and confirm its actual base.
 5. Base spec ticket worktrees on the integration branch. Integrate worker commits serially.
 6. Prefer the host’s worktree manager when available. Otherwise use Git’s worktree commands.
-7. Before the first write, link the chosen worktree to the issue: put the issue number in its branch name.
+7. Before the first write, link the chosen worktree to the issue: a new branch carries the issue number in its name.
    In Orca, also run `orca worktree set --worktree current --issue <number>`.
 
 Use the root checkout for orientation rather than implementation.
