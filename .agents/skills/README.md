@@ -28,9 +28,11 @@ If independent subagents are unavailable, report independent review as unavailab
 - Setup selects English or Russian human language and preserves existing settings and equivalent pointers.
 - Explanations and architecture reports follow that language. Tracker authorship precedes localized triage disclosures.
 - `to-spec` keeps every upstream line; project rules sit in separate added lines.
-- `ask-matt`, `to-spec` and `to-tickets` read project policy without redefining it; diagnosis follows the same authority.
+- `ask`, `to-spec` and `to-tickets` read project policy without redefining it; diagnosis follows the same authority.
 - Instruction ownership (#3): delivery criteria stay in the project guide and actions in `ship`. This change removes no upstream Matt text.
 - `to-spec` calls the spec a snapshot of the decision, not a description of current behavior.
+- `ask` is Matt's `ask-matt`, renamed through `.agents/upstream/mattpocock/RENAMES` (#14). It advises as a colleague, with reasons and when to depart, and adds design references with Russian twins: work size and shape, design order, practice menu, DDD and EventStorming glossary, and the ai-first-platform#48 case.
+- `domain-modeling` offers a practice in one sentence when the conversation shows its signs, writes a walkthrough's outcome as text and offers a board only on request or for long text (#13).
 
 ## Notices and updates
 
@@ -47,11 +49,11 @@ Hashes establish identity, not correctness or behavior.
 
 | Skill | SHA-256 |
 | --- | --- |
-| `ask-matt` | `68e78cf855fe70134e993ad8c6329e2048176da5669892715ae008bb1766062a` |
+| `ask` | `556e17f39823a5952387ae7ce9a620ecd8116d4f671a3007be7b7e2d10da36d3` |
 | `code-review` | `651145cbbce0a813dce3071e720b54009af4e54fdfe6ae06a79b48ac10281007` |
 | `codebase-design` | `5e680d83ed795dfdce570831c31c7e95927c3a3403a2f71006c8684f35472b84` |
 | `diagnosing-bugs` | `7f45fd315cf2ce923ff2208eb76d4ba3189f5e14b0b1ff33ff5256265ddd3bd9` |
-| `domain-modeling` | `9b0447b29704143616c0781fef03690073e22c3cd3e4068efa3e80b73d00593c` |
+| `domain-modeling` | `3d8be44d1943d5d47ebb9e360fe4dde0c2f45a932306f7c5fe6f1734fb8ef60b` |
 | `grill-me` | `14c292fe16c0aed833cbbabb0983515c8d665fb6061d9755b13dba870363323b` |
 | `grill-with-docs` | `2dff19547f0f72000f8b88868e21b7d76c27cf5c7ececc6edf4042bbe06157ac` |
 | `grilling` | `27f71f106a7062691b2982d4f847304a62930ebed8b50734f4d4fd498d60afa8` |

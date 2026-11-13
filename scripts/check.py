@@ -52,6 +52,15 @@ def read_source(root: Path) -> dict[str, str]:
     return dict(line.split(": ", 1) for line in lines if ": " in line)
 
 
+def local_names(root: Path) -> dict[str, str]:
+    """Map renamed upstream skills to their local names, from `upstream-name: local-name` lines in RENAMES."""
+    file = root / UPSTREAM / "RENAMES"
+    if not file.is_file():
+        return {}
+    lines = [line.split("#", 1)[0].strip() for line in file.read_text().splitlines()]
+    return dict(tuple(part.strip() for part in line.split(":", 1)) for line in lines if ":" in line)
+
+
 def check_upstream(root: Path, skills: Path) -> list[str]:
     errors, upstream = [], root / UPSTREAM
     if not (upstream / "SOURCE").is_file():
@@ -59,8 +68,9 @@ def check_upstream(root: Path, skills: Path) -> list[str]:
     source = read_source(root)
     if not (upstream / "skills").is_dir() or identity(upstream / "skills") != source.get("sha256"):
         errors.append(f"{UPSTREAM}: pristine copy differs from SOURCE; never edit it by hand")
+    names = local_names(root)
     for directory in sorted((upstream / "skills").glob("*/*")):
-        if not (skills / directory.name / "SKILL.md").is_file():
+        if not (skills / names.get(directory.name, directory.name) / "SKILL.md").is_file():
             errors.append(f"{directory.relative_to(root)}: no local skill with this name")
     revision = source.get("revision", "")
     if not re.fullmatch(r"[0-9a-f]{40}", revision):

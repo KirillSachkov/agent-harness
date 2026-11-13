@@ -1,12 +1,14 @@
 ---
-name: ask-matt
-description: Ask which skill or flow fits your situation. A router over the skills in this repo.
+name: ask
+description: Ask where you are and how best to proceed: which skill or flow fits, what size and shape the work needs, in which order to design, and when DDD, EventStorming or a board helps.
 disable-model-invocation: true
 ---
 
-# Ask Matt
+# Ask
 
-Before advising a route, read root `AGENTS.md` and its preparation pointers for project policy.
+Before advising a route, read root `AGENTS.md` and its preparation pointers for project policy. Where advice here differs from project policy, the policy wins.
+
+Answer like an experienced colleague: give the advice, the reason for it, and when it makes sense to depart from it. Advice is not a mandatory step or a template; the user decides.
 
 You don't remember every skill, so ask.
 
@@ -40,6 +42,15 @@ The route most work travels. You have an idea and want it built.
 Keep steps 1–3 in **one unbroken context window** (don't compact or clear until after `/to-tickets`) so the grilling, spec, and tickets all build on the same thinking. Each `/implement` then starts fresh, working from the ticket. Run `/retro` in the session it's looking back on, before you clear; after clearing, point it at that session's log instead.
 
 The limit on this is the **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**: the window (~150k tokens on state-of-the-art models) within which the model still reasons sharply. If a session approaches it before `/to-tickets`, don't push on degraded; `/compact` at the nearest phase boundary and carry on (see Phase boundaries).
+
+## Before the spec: size, order and practices
+
+Questions that usually come up around steps 1–3 of the main flow. Read the linked reference before advising on them: it carries the reasons, the cases and the sources. Each reference has a Russian twin (`*.ru.md`) for the user to read.
+
+- **Size and shape.** One spec covers one capability that is accepted as one result; work that fits one session needs a short issue, not a spec. A new product starts with a product document (problem, goals, first-version slice) plus language and boundaries, then one spec per capability. Bugs, refactors, migrations, integrations and technical changes each have their own shape: [WORK-SHAPES.en.md](WORK-SHAPES.en.md).
+- **Design order.** Behaviour, quality, technical shape, unknowns, then `/to-spec`: the spec is the outcome of design. A spec that is ready but technically unthought gets its key scenarios walked through the modules, and the decisions go back into the spec. A `/wayfinder` map ends with one `/to-spec` that consolidates its decisions: [DESIGN-ORDER.en.md](DESIGN-ORDER.en.md), and the [case behind it](CASE-SPEC48.en.md).
+- **Practices.** Name the blocking question first, then pick the practice. Signs that one pays off: several actors or modules, failure branches, states, a word with two meanings. A small feature needs rules and two or three examples, not EventStorming. When each practice helps and when it does not: [PRACTICES.en.md](PRACTICES.en.md); terms: [DDD-GLOSSARY.en.md](DDD-GLOSSARY.en.md).
+- **Boards.** Offer one when the user asks to see it or the text has grown too long to follow. The decision still lives in text.
 
 ## On-ramps
 
