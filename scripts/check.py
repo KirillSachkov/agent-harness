@@ -138,11 +138,11 @@ def check(root: Path) -> tuple[list[str], dict[str, int]]:
                 errors.append(f"{file.relative_to(root)}: missing anchor {raw}")
 
     for file in root.rglob("CLAUDE.md"):
-        if ".git" not in file.relative_to(root).parts:
+        if ".git" not in file.relative_to(root).parts and not file.is_relative_to(upstream):
             errors.append(f"{file.relative_to(root)}: use native AGENTS.md instead of CLAUDE.md")
-    for left, right in [(".claude/skills", ".agents/skills")]:
-        if not (root / left).is_symlink() or (root / left).resolve() != (root / right).resolve():
-            errors.append(f"{left}: incorrect client pointer")
+    pointer = root / ".claude/skills"
+    if not pointer.is_symlink() or pointer.resolve() != (root / ".agents/skills").resolve():
+        errors.append(".claude/skills: incorrect client pointer")
     if not re.search(r"^Human language: (en|ru)\.$", (root / "AGENTS.md").read_text(), re.M):
         errors.append("AGENTS.md: choose an explicit en or ru human language")
     for file in root.rglob("*.en.md"):

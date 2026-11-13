@@ -4,41 +4,36 @@ Run from the repository root: python3 -m unittest discover -s scripts
 """
 from __future__ import annotations
 
-import shutil
-import tempfile
 import unittest
 from pathlib import Path
 
-import check
+from test_upstream import check_copy
 
-ROOT = Path(__file__).resolve().parents[1]
+UPSTREAM_SKILL = ".agents/upstream/mattpocock/skills/productivity/grilling"
 
 
 class ClientPointers(unittest.TestCase):
-    def errors(self, change) -> list[str]:
-        with tempfile.TemporaryDirectory() as temporary:
-            copy = Path(temporary) / "repo"
-            shutil.copytree(ROOT, copy, symlinks=True, ignore=shutil.ignore_patterns(".git"))
-            change(copy)
-            return check.check(copy)[0]
-
     def test_root_claude_md_fails(self) -> None:
         self.assertIn(
             "CLAUDE.md: use native AGENTS.md instead of CLAUDE.md",
-            self.errors(lambda copy: (copy / "CLAUDE.md").symlink_to("AGENTS.md")),
+            check_copy(lambda copy: (copy / "CLAUDE.md").symlink_to("AGENTS.md")),
         )
 
     def test_nested_claude_md_fails(self) -> None:
         self.assertIn(
             "docs/CLAUDE.md: use native AGENTS.md instead of CLAUDE.md",
-            self.errors(lambda copy: (copy / "docs/CLAUDE.md").write_text("# Notes\n")),
+            check_copy(lambda copy: (copy / "docs/CLAUDE.md").write_text("# Notes\n")),
         )
+
+    def test_claude_md_in_pristine_upstream_copy_is_not_reported_as_ours(self) -> None:
+        errors = check_copy(lambda copy: (copy / UPSTREAM_SKILL / "CLAUDE.md").write_text("# Upstream\n"))
+        self.assertNotIn(f"{UPSTREAM_SKILL}/CLAUDE.md: use native AGENTS.md instead of CLAUDE.md", errors)
 
     def test_broken_skills_pointer_fails(self) -> None:
         def unlink(copy: Path) -> None:
             (copy / ".claude/skills").unlink()
 
-        self.assertIn(".claude/skills: incorrect client pointer", self.errors(unlink))
+        self.assertIn(".claude/skills: incorrect client pointer", check_copy(unlink))
 
 
 if __name__ == "__main__":
