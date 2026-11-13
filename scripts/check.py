@@ -75,8 +75,20 @@ def check(root: Path) -> tuple[list[str], dict[str, int]]:
         if row not in inventory:
             errors.append(f"{directory.name}: directory identity differs from inventory")
 
+    upstream = root / ".agents/upstream/mattpocock"
+    source = dict(
+        line.split(": ", 1) for line in (upstream / "SOURCE").read_text().splitlines() if ": " in line
+    )
+    if identity(upstream / "skills") != source.get("sha256"):
+        errors.append(".agents/upstream/mattpocock: pristine copy differs from SOURCE; never edit it by hand")
+    for directory in sorted((upstream / "skills").glob("*/*")):
+        if not (skills / directory.name / "SKILL.md").is_file():
+            errors.append(f"{directory.relative_to(root)}: no local skill with this name")
+    if source.get("revision", "-") not in inventory:
+        errors.append(".agents/skills/README.md: does not name the upstream revision from SOURCE")
+
     for file in sorted(root.rglob("*.md")):
-        if ".git" in file.relative_to(root).parts:
+        if ".git" in file.relative_to(root).parts or file.is_relative_to(upstream):
             continue
         for raw in re.findall(r"(?<!!)\[[^\]\n]*\]\(([^)\n]+)\)", prose(file.read_text())):
             url = urlsplit(raw.strip().split(' "')[0].strip("<>"))

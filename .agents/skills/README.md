@@ -4,7 +4,8 @@ This directory contains 27 editable skill copies derived from
 [Matt Pocock’s snapshot](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa),
 commit `a496f5513d4a4cf889bc48e189e579f4b0bdf6aa`, and the locally authored `ship` skill.
 They arrived through [ai-first-platform](https://github.com/KirillSachkov/ai-first-platform/commit/53c0b946506b41839e255806144c3289680061c8).
-These are adapted copies, not a claim of byte identity with upstream.
+These are adapted copies. The pristine upstream copy lives in `.agents/upstream/mattpocock`;
+`python3 scripts/upstream.py diff` shows every adaptation line by line.
 
 ## Runtime
 
@@ -34,14 +35,13 @@ If independent subagents are unavailable, report independent review as unavailab
 ## Notices and updates
 
 Retain [Matt’s MIT notice](LICENSE.mattpocock), [HumanLayer’s MIT notice](LICENSE.humanlayer) and [PR credits](pr/CREDITS.md).
-See [upstream maintenance](../../docs/upstream.en.md) for selective three-way updates.
-Default source exceptions: none. Locally authored skill: `ship`.
+See [upstream maintenance](../../docs/upstream.en.md) for three-way updates with `scripts/upstream.py`.
+Locally authored skill: `ship`.
 Local adaptations do not imply a newer upstream source revision.
-Record per-skill source exceptions here before changing the default source snapshot after a partial update.
 
 ## Content identity
 
-SHA-256 per directory: sorted relative file paths encoded as UTF-8, NUL, file bytes, NUL.
+SHA-256 per directory, local copies here and the pristine copy in its `SOURCE`: sorted relative file paths encoded as UTF-8, NUL, file bytes, NUL.
 Concatenate each entry and hash the result. Includes references and native metadata.
 Hashes establish identity, not correctness or behavior.
 
