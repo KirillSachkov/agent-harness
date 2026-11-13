@@ -27,7 +27,7 @@ class ClientPointers(unittest.TestCase):
 
     def test_claude_md_in_pristine_upstream_copy_is_not_reported_as_ours(self) -> None:
         errors = check_copy(lambda copy: (copy / UPSTREAM_SKILL / "CLAUDE.md").write_text("# Upstream\n"))
-        self.assertNotIn(f"{UPSTREAM_SKILL}/CLAUDE.md: use native AGENTS.md instead of CLAUDE.md", errors)
+        self.assertEqual([error for error in errors if "CLAUDE.md" in error], [])
 
     def test_broken_skills_pointer_fails(self) -> None:
         def unlink(copy: Path) -> None:
