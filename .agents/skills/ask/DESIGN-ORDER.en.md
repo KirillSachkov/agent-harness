@@ -8,7 +8,7 @@ A spec is the outcome of design, not its start. A convenient order is usually: b
 
 1. **Behaviour.** What must hold for the user: the process step by step, rules, examples for disputed rules, lifecycles. Why first: quality and technology depend on what exactly the system does. Practices: process modelling, Example Mapping and lifecycles from the [practice menu](PRACTICES.en.md).
 2. **Quality.** Which load, latency and failures the system withstands. Write it short: context, stimulus, measure, for example "with 50 concurrent sign-ins the response arrives within 300 ms; if the provider is down, the user sees a clear refusal". A scenario needs numbers, units and at least one failure path. Top quality goals live in the product document, testable scenarios become spec criteria, and a lasting constraint goes into an ADR.
-3. **Technical shape.** Where each rule lives, which contracts and data, whether a transaction boundary is needed. Walk the key scenarios through the modules and return the decisions to the spec. Why: a wrong shape is most expensive to discover in code.
+3. **Technical shape.** Where each rule lives, which contracts and data, whether a transaction boundary is needed. Walk the key scenarios through the modules and return the decisions to the spec, as described [below](#updating-a-spec-before-implementation). Why: a wrong shape is most expensive to discover in code.
 4. **Unknowns.** Facts about APIs, technologies, performance. `research`, `prototype` or a spike answers them, not a guess in the spec.
 5. **`to-spec`.** Collects what was decided into one spec: stories, criteria, quality scenarios, implementation decisions, test seams.
 
@@ -20,10 +20,15 @@ When large work runs as a `wayfinder` map, decisions land in different map issue
 
 The consolidated spec names the status of each input: requirement, implementation decision, research fact or material for people. An open question in it is either resolved or deferred, naming who decides and what it blocks.
 
+## Updating a spec before implementation
+
+Before implementation starts, an updated spec goes one of two ways: into the body of the earlier issue, or into a new issue that links the earlier one and lists the criteria it replaces. `/to-spec` publishes a new issue by default. The owner chooses. In [ai-first-platform#48](https://github.com/KirillSachkov/ai-first-platform/issues/48) the owner chose to update the body.
+
 ## Where things live
 
 | What | Where |
 |---|---|
+| Product document: problem, goals, first-version slice | Usually a vision issue or a map in the tracker. In `ai-first-platform` it is map [#1](https://github.com/KirillSachkov/ai-first-platform/issues/1); there is no separate file, and the owner decided to remove `docs/first-version.md` ([#63](https://github.com/KirillSachkov/ai-first-platform/issues/63)). A product document kept as a file describes intent, not current behaviour, so it does not conflict with the [current-behaviour rule](../../../docs/agents/requirements.md#current-behavior-and-history) |
 | Terms | `DOMAIN.md` |
 | A decision that is hard to reverse | ADR |
 | Requirements for a change | Issue or spec; after merge it is history |
