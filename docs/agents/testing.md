@@ -8,7 +8,7 @@ It has no product runtime, application tests or live-agent evaluation suite.
 Run from the repository root:
 
 - `python3 scripts/check.py`: local Markdown links/anchors, skill identity and invocation metadata, directory hashes, the pristine upstream copy and client pointers.
-- `python3 -m unittest discover -s scripts`: regression tests for `scripts/upstream.py` and the upstream checks.
+- `python3 -m unittest discover -s scripts`: regression tests for `scripts/upstream.py`, the upstream checks and the client pointer checks.
 - `git diff --check`: whitespace errors in the change.
 
 Before a PR, run all three commands and report their actual results.
