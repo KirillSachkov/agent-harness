@@ -7,6 +7,8 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 Use the human language selected in root `AGENTS.md` for titles, headings, bodies and comments.
 Prefix agent-authored messages with `Agent (<client>):` for English or `Агент (<client>):` for Russian.
 Put skill-specific disclosures after this prefix, in the selected language.
+Attribute a decision to the owner only with a quote of their message and where they wrote it.
+Otherwise say that the agent decided and why.
 
 ## Conventions
 

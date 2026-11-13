@@ -17,6 +17,8 @@ jobs:
           fetch-depth: 0
       - name: Check structure
         run: python3 scripts/check.py
+      - name: Test scripts
+        run: python3 -m unittest discover -s scripts
       - name: Check whitespace
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then

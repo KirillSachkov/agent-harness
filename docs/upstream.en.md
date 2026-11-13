@@ -3,22 +3,31 @@
 [Русский](upstream.ru.md)
 
 The repository keeps editable skill copies, not a runtime dependency on another repository.
-Matt’s default source snapshot is `a496f5513d4a4cf889bc48e189e579f4b0bdf6aa`.
+Matt’s pinned source revision is recorded once, in `.agents/upstream/mattpocock/SOURCE`.
 The starting local adaptations came through [ai-first-platform](https://github.com/KirillSachkov/ai-first-platform/commit/53c0b946506b41839e255806144c3289680061c8).
-This does not mean every file is identical to Matt’s snapshot.
+
+## Pristine copy
+
+`.agents/upstream/mattpocock/skills/` holds the borrowed skills exactly as upstream has them at the pinned revision, in upstream’s `skills/<group>/<skill>` layout.
+Clients do not discover skills there; they read `.agents/skills`.
+`SOURCE` records the repository, revision, date and directory hash. `scripts/check.py` fails when the copy differs from that hash, so nobody edits it by hand. It also fails when the snapshot links in `.agents/skills/README.md` and `NOTICE` name another revision.
+
+Show our adaptations: `python3 scripts/upstream.py diff`, or `python3 scripts/upstream.py diff --stat` for a summary, optionally with skill names.
+
+When we rename a borrowed skill, an `upstream-name: local-name` line in `.agents/upstream/mattpocock/RENAMES` links it to the original. The file is ours and is not part of the copy's hash. `diff` and `update` use it to find the local directory, and `check.py` verifies that the upstream skill and the local directory both exist.
 
 ## Select an update
 
 1. Open an issue describing the upstream change, desired benefit, boundaries and verification.
-2. Obtain the old pinned source and the proposed new source in separate temporary copies.
-3. Compare three versions: old upstream, new upstream and our current file.
-4. Select useful changes and preserve local policy. Include references and native metadata belonging to the skill.
-5. Record the source revision and adaptations, run repository checks and review the result through a PR.
+2. Commit or discard pending changes under `.agents`.
+3. Run `python3 scripts/upstream.py update <revision>`. It fetches upstream into a temporary directory and runs `git merge-file` for every file of each borrowed skill: our file, the old upstream and the new upstream.
+4. Resolve conflict markers and the files the script reports. To decline an upstream change, keep our text; the difference then shows as a local adaptation.
+5. Update the snapshot links in `.agents/skills/README.md` and `NOTICE`, the adaptation list and the directory hashes, run repository checks and review the result through a PR.
 
-Do not overwrite the local skills directory with a new upstream directory.
-For a partial update, record per-skill source exceptions in `.agents/skills/README.md`.
-Keep the default snapshot until a complete update accounts for every borrowed file.
-Update directory hashes after changes; matching hashes establish identity, not quality.
+The update moves the whole pristine copy to one revision; there are no per-skill source exceptions.
+New upstream skills are listed but not adopted. A borrowed skill missing upstream stops the update before any change.
+If an update stops halfway, discard it with `git restore --staged --worktree -- .agents` and `git clean -fd -- .agents`; step 2 keeps that safe.
+Matching hashes establish identity, not quality.
 No scheduled synchronization, update bot, submodule or installer runs here.
 
 ## Local adaptations
@@ -26,7 +35,7 @@ No scheduled synchronization, update bot, submodule or installer runs here.
 The starting adaptations cover domain naming, explicit project authority, committed review, correction verification and PR delivery.
 This repository adds language selection and removes application-specific facts.
 `ship` is locally authored rather than copied from Matt.
-The skill README records runtime pointers, notices and identities.
+The skill README records runtime pointers, notices, identities and the list of adaptations.
 Keep one operational source for project policy when merging upstream suggestions.
 
 ## Notices and provenance

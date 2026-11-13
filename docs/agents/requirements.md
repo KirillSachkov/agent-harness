@@ -9,8 +9,11 @@ A readiness label alone does not make an issue ready.
 Use a short issue for a clear bug, documentation change or bounded refactoring.
 Use a change spec for unresolved behavior, several scenarios or contributors, contract changes or costly failure.
 Propose user-only `to-spec` for the owner to select when needed.
+Before proposing that the owner start an issue, confirm it is still open.
 Propose `to-tickets` when independent slices need explicit dependencies.
 Tickets reference parent requirements instead of duplicating them.
+When a Wayfinder map leads to implementation, it ends with one consolidated `to-spec` that gathers the decisions of its tickets.
+`to-tickets` works from that spec rather than from separate ticket comments.
 Keep large ideas as proposals until concrete behavior is ready to specify.
 
 ## Current behavior and history
@@ -40,6 +43,8 @@ Use the `to-spec` template for full specs and [human participation](human-review
 
 Before changing agreed behavior, show the semantic difference and follow [Ask the owner](human-review.md#ask-the-owner).
 Record the decision in the issue and update affected criteria, tickets, checks and implementation.
+For started work, a scope change takes effect once it is recorded in the issue and sent to the session doing it.
+A reply inside a conversation leaves scope unchanged until then.
 A passing test does not justify changing requirements to match the implementation.
 After merge, new desired behavior gets a new issue.
 The new issue links the earlier issue and names each criterion it replaces.

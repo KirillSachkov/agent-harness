@@ -9,7 +9,7 @@ Worktree means a separate working copy with its own branch. CI means automated r
 ```mermaid
 flowchart TD
     A["Owner and agent agree the issue"] --> B["Owner selects implement or implement-spec"]
-    B --> C["Agent works in a dedicated worktree"]
+    B --> C["Agent checks for other work on the issue and works in a dedicated worktree linked to it"]
     C --> D["Checks, commit and independent review"]
     D --> E["Corrections and their independent check when needed"]
     E --> F["ship: PR, current CI, full SHA of the last PR commit"]
@@ -25,11 +25,24 @@ flowchart TD
 | Clear small task | Short issue with result, boundaries, criteria and verification | Owner selects `implement` |
 | Idea with open decisions | Discuss; research or prototype when needed | Start after agreeing the bounded change |
 | Large change | `to-spec`; `to-tickets` when slices need dependencies | `implement-spec`, or individual tickets through `implement` |
+| Questions explored on a Wayfinder map | A map that leads to implementation ends with one consolidated `to-spec`; `to-tickets` works from it | As for a large change |
 | Unclear bug | `diagnosing-bugs` gathers reproduction and cause | Diagnosis alone does not authorize a fix |
 | Quick fix | Short issue; a full spec is usually unnecessary | The same worktree and verification rules apply |
 
 Naming the skill in ordinary language is sufficient: “Use implement for issue 12.”
 An unnamed implementation request gets a proposed route rather than an automatic start.
+Before proposing to start an issue, the agent checks that it is still open.
+
+## Parallel sessions
+
+All agents work under the owner’s GitHub account, so Assignees cannot tell one session from another.
+Before starting, a session looks for open PRs, branches and worktrees for the issue; in Orca, also for workspaces and agents linked to it.
+If another session is already active, it asks the owner.
+It links its worktree to the issue: a new branch carries the issue number, and in Orca the worktree’s metadata names the issue.
+A scope change for started work goes into the issue and to the session doing it; a reply in a conversation alone does not change scope.
+An agent writes “by the owner’s decision” only with a quote of the owner’s message. Otherwise it says that the agent decided and why.
+Approval relayed by another agent is recorded with its chain: where and when the owner answered, who relayed it, and which commit it covers.
+A question to the owner names known overlapping issues, PRs and active sessions.
 
 ## Where behavior is described
 
