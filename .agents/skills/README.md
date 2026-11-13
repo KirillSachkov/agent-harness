@@ -10,7 +10,7 @@ These are adapted copies. The pristine upstream copy lives in `.agents/upstream/
 ## Runtime
 
 Skills live in `.agents/skills`; `.claude/skills` points here.
-Root `CLAUDE.md` points to the same `AGENTS.md` authority.
+Clients read root `AGENTS.md` natively; the repository has no `CLAUDE.md`.
 Use the client’s native skill mechanism where available.
 When it is unavailable, read the named SKILL.md and its references, then follow the explicit assignment.
 This fallback does not allow an agent to select user-only entrypoints itself.

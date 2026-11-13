@@ -151,13 +151,18 @@ class Pairs(unittest.TestCase):
         )
 
 
+def check_copy(change) -> list[str]:
+    """Run check.py on a copy of this repository after change(copy) edits it."""
+    with tempfile.TemporaryDirectory() as temporary:
+        copy = Path(temporary) / "repo"
+        shutil.copytree(ROOT, copy, symlinks=True, ignore=shutil.ignore_patterns(".git"))
+        change(copy)
+        return check.check(copy)[0]
+
+
 class CheckUpstreamCopy(unittest.TestCase):
     def errors(self, change) -> list[str]:
-        with tempfile.TemporaryDirectory() as temporary:
-            copy = Path(temporary) / "repo"
-            shutil.copytree(ROOT, copy, symlinks=True, ignore=shutil.ignore_patterns(".git"))
-            change(copy)
-            return check.check(copy)[0]
+        return check_copy(change)
 
     def test_clean_repository_passes(self) -> None:
         self.assertEqual(self.errors(lambda copy: None), [])

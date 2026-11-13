@@ -31,7 +31,7 @@ README, процесс, границы, сопровождение upstream и �
 ## Состав
 
 - 27 редактируемых skills на основе Matt Pocock и локальный `ship`.
-- Native metadata, ссылка `.claude/skills` на `.agents/skills` и ссылка `CLAUDE.md` на `AGENTS.md`.
+- Native metadata и ссылка `.claude/skills` на `.agents/skills`. Claude Code и Codex читают `AGENTS.md` сами, поэтому `CLAUDE.md` нет.
 - Проектные правила требований, worktree, тестирования, человеческого участия и доставки.
 - `python3 scripts/check.py` для структурной проверки без сторонних пакетов Python.
 

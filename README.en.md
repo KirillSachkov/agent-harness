@@ -32,7 +32,7 @@ The authoritative agent rules live in [AGENTS.md](AGENTS.md) and its conditional
 ## Contents
 
 - 27 editable skills derived from Matt Pocock and the local `ship` skill.
-- Native skill metadata, `.claude/skills` pointing to `.agents/skills`, and `CLAUDE.md` pointing to `AGENTS.md`.
+- Native skill metadata and `.claude/skills` pointing to `.agents/skills`. Claude Code and Codex read `AGENTS.md` natively, so there is no `CLAUDE.md`.
 - Project-owned requirements, worktree, testing, human-participation and delivery rules.
 - `python3 scripts/check.py` for structural verification without third-party Python packages.
 
