@@ -28,7 +28,7 @@
 
 | Что | Где |
 |---|---|
-| Документ о продукте: проблема, цели, срез первой версии | Обычно задача-видение или карта в трекере. В `ai-first-platform` это карта [#1](https://github.com/KirillSachkov/ai-first-platform/issues/1); отдельного файла нет, а файл `docs/first-version.md` владелец решил удалить ([#63](https://github.com/KirillSachkov/ai-first-platform/issues/63)). Если документ лежит файлом, он описывает намерение, а не текущее поведение, поэтому [правилу о текущем поведении](../../../docs/agents/requirements.md#current-behavior-and-history) он не противоречит |
+| Документ о продукте: проблема, цели, срез первой версии | Обычно задача-видение или карта в трекере. В `ai-first-platform` эту роль выполняет карта [#1](https://github.com/KirillSachkov/ai-first-platform/issues/1), а файл `docs/first-version.md` владелец решил удалить ([#63](https://github.com/KirillSachkov/ai-first-platform/issues/63), на 13 ноября 2026 года задача открыта). Если документ лежит файлом, он описывает намерение, а не текущее поведение, поэтому [правилу о текущем поведении](../../../docs/agents/requirements.md#current-behavior-and-history) он не противоречит |
 | Термины | `DOMAIN.md` |
 | Решение, которое трудно отменить | ADR |
 | Требования к изменению | Задача или спецификация, после слияния это история |

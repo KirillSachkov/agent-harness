@@ -49,7 +49,7 @@ Hashes establish identity, not correctness or behavior.
 
 | Skill | SHA-256 |
 | --- | --- |
-| `ask` | `04455f28bcd455e0ec20501f47b1f49784a46d9fd09f02a17da43338f9fe0467` |
+| `ask` | `66c9487880be6402e8c7d49be8af777d7b5bf667a732fdcbb9d591fbda7d12dc` |
 | `code-review` | `651145cbbce0a813dce3071e720b54009af4e54fdfe6ae06a79b48ac10281007` |
 | `codebase-design` | `5e680d83ed795dfdce570831c31c7e95927c3a3403a2f71006c8684f35472b84` |
 | `diagnosing-bugs` | `7f45fd315cf2ce923ff2208eb76d4ba3189f5e14b0b1ff33ff5256265ddd3bd9` |

@@ -28,7 +28,7 @@ Before implementation starts, an updated spec goes one of two ways: into the bod
 
 | What | Where |
 |---|---|
-| Product document: problem, goals, first-version slice | Usually a vision issue or a map in the tracker. In `ai-first-platform` it is map [#1](https://github.com/KirillSachkov/ai-first-platform/issues/1); there is no separate file, and the owner decided to remove `docs/first-version.md` ([#63](https://github.com/KirillSachkov/ai-first-platform/issues/63)). A product document kept as a file describes intent, not current behaviour, so it does not conflict with the [current-behaviour rule](../../../docs/agents/requirements.md#current-behavior-and-history) |
+| Product document: problem, goals, first-version slice | Usually a vision issue or a map in the tracker. In `ai-first-platform` map [#1](https://github.com/KirillSachkov/ai-first-platform/issues/1) takes this role, and the owner decided to remove the file `docs/first-version.md` ([#63](https://github.com/KirillSachkov/ai-first-platform/issues/63), still open on 13 November 2026). A product document kept as a file describes intent, not current behaviour, so it does not conflict with the [current-behaviour rule](../../../docs/agents/requirements.md#current-behavior-and-history) |
 | Terms | `DOMAIN.md` |
 | A decision that is hard to reverse | ADR |
 | Requirements for a change | Issue or spec; after merge it is history |
