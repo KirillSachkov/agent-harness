@@ -13,17 +13,11 @@ import sys
 import tempfile
 from pathlib import Path
 
-from check import identity
+from check import UPSTREAM, identity, read_source
 
 ROOT = Path(__file__).resolve().parents[1]
-UPSTREAM = Path(".agents/upstream/mattpocock")
 LOCAL = Path(".agents/skills")
 REPOSITORY = "https://github.com/mattpocock/skills"
-
-
-def read_source(root: Path) -> dict[str, str]:
-    lines = (root / UPSTREAM / "SOURCE").read_text().splitlines()
-    return dict(line.split(": ", 1) for line in lines if ": " in line)
 
 
 def write_source(root: Path, revision: str, date: str) -> None:
@@ -74,15 +68,18 @@ def merge_skill(old: Path, new: Path, local: Path) -> list[str]:
             if same(o, n):
                 continue
             if same(o, l):
-                shutil.copyfile(n, l)
+                shutil.copy(n, l)
                 continue
             labels = ["-L", "local", "-L", "old upstream", "-L", "new upstream"]
-            if subprocess.run(["git", "merge-file", *labels, l, o, n]).returncode:
+            code = subprocess.run(["git", "merge-file", *labels, l, o, n]).returncode
+            if code > 127:
+                problems.append(f"{name}: git merge-file failed (binary or unreadable file); local file kept")
+            elif code:
                 problems.append(f"{name}: conflict markers left in the file")
         elif n.is_file() and not o.is_file():
             if not l.is_file():
                 l.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(n, l)
+                shutil.copy(n, l)
             elif not same(n, l):
                 problems.append(f"{name}: added both upstream and locally; local file kept")
         elif o.is_file() and not n.is_file() and l.is_file():
@@ -146,7 +143,7 @@ def main(argv: list[str], root: Path = ROOT) -> int:
         revision, date = fetch(args.repository, args.revision, Path(temporary) / "upstream")
         problems = update(root, Path(temporary) / "upstream", revision, date)
     print(f"Merged upstream {revision} ({date}). Review with: git diff -- .agents")
-    print("Then update notices, adaptations and directory hashes in .agents/skills/README.md.")
+    print("Then update snapshot links in .agents/skills/README.md and NOTICE, adaptations and directory hashes.")
     for problem in problems:
         print(problem, file=sys.stderr)
     return 1 if problems else 0

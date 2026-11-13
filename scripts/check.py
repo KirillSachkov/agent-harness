@@ -43,6 +43,36 @@ def identity(directory: Path) -> str:
     return digest.hexdigest()
 
 
+UPSTREAM = Path(".agents/upstream/mattpocock")
+
+
+def read_source(root: Path) -> dict[str, str]:
+    """Read the `key: value` lines of the pristine upstream copy's SOURCE file."""
+    lines = (root / UPSTREAM / "SOURCE").read_text().splitlines()
+    return dict(line.split(": ", 1) for line in lines if ": " in line)
+
+
+def check_upstream(root: Path, skills: Path) -> list[str]:
+    errors, upstream = [], root / UPSTREAM
+    if not (upstream / "SOURCE").is_file():
+        return [f"{UPSTREAM}/SOURCE: missing"]
+    source = read_source(root)
+    if not (upstream / "skills").is_dir() or identity(upstream / "skills") != source.get("sha256"):
+        errors.append(f"{UPSTREAM}: pristine copy differs from SOURCE; never edit it by hand")
+    for directory in sorted((upstream / "skills").glob("*/*")):
+        if not (skills / directory.name / "SKILL.md").is_file():
+            errors.append(f"{directory.relative_to(root)}: no local skill with this name")
+    revision = source.get("revision", "")
+    if not re.fullmatch(r"[0-9a-f]{40}", revision):
+        errors.append(f"{UPSTREAM}/SOURCE: revision must be a full commit SHA")
+    else:
+        for name in [".agents/skills/README.md", "NOTICE"]:
+            pinned = set(re.findall(r"mattpocock/skills/tree/([0-9a-f]{40})", (root / name).read_text()))
+            if pinned != {revision}:
+                errors.append(f"{name}: Matt's snapshot link must name the SOURCE revision {revision}")
+    return errors
+
+
 def check(root: Path) -> tuple[list[str], dict[str, int]]:
     root = root.resolve()
     errors, counts = [], {"skills": 0, "local_links": 0}
@@ -75,17 +105,8 @@ def check(root: Path) -> tuple[list[str], dict[str, int]]:
         if row not in inventory:
             errors.append(f"{directory.name}: directory identity differs from inventory")
 
-    upstream = root / ".agents/upstream/mattpocock"
-    source = dict(
-        line.split(": ", 1) for line in (upstream / "SOURCE").read_text().splitlines() if ": " in line
-    )
-    if identity(upstream / "skills") != source.get("sha256"):
-        errors.append(".agents/upstream/mattpocock: pristine copy differs from SOURCE; never edit it by hand")
-    for directory in sorted((upstream / "skills").glob("*/*")):
-        if not (skills / directory.name / "SKILL.md").is_file():
-            errors.append(f"{directory.relative_to(root)}: no local skill with this name")
-    if source.get("revision", "-") not in inventory:
-        errors.append(".agents/skills/README.md: does not name the upstream revision from SOURCE")
+    errors += check_upstream(root, skills)
+    upstream = root / UPSTREAM
 
     for file in sorted(root.rglob("*.md")):
         if ".git" in file.relative_to(root).parts or file.is_relative_to(upstream):

@@ -5,6 +5,7 @@ Run from the repository root: python3 -m unittest discover -s scripts
 from __future__ import annotations
 
 import contextlib
+import os
 import io
 import shutil
 import subprocess
@@ -69,10 +70,13 @@ class MergeSkill(unittest.TestCase):
         self.assertEqual(self.merge(), [])
         self.assertEqual((self.local / "SKILL.md").read_text(), "rewritten\n")
 
-    def test_file_added_upstream_is_copied(self) -> None:
+    def test_file_added_upstream_is_copied_with_its_mode(self) -> None:
         write(self.new / "REFERENCE.md", "new\n")
+        write(self.new / "run.sh", "#!/bin/sh\n")
+        (self.new / "run.sh").chmod(0o755)
         self.assertEqual(self.merge(), [])
         self.assertEqual((self.local / "REFERENCE.md").read_text(), "new\n")
+        self.assertTrue(os.access(self.local / "run.sh", os.X_OK))
 
     def test_file_removed_upstream_is_removed_only_when_unadapted(self) -> None:
         write(self.old / "plain.md", "a\n")
@@ -137,6 +141,40 @@ class CheckUpstreamCopy(unittest.TestCase):
             ".agents/upstream/mattpocock: pristine copy differs from SOURCE; never edit it by hand",
             self.errors(edit),
         )
+
+    def test_upstream_skill_without_local_copy_fails(self) -> None:
+        def remove(copy: Path) -> None:
+            shutil.rmtree(copy / ".agents/skills/grilling")
+            readme = copy / ".agents/skills/README.md"
+            readme.write_text("\n".join(l for l in readme.read_text().splitlines() if "`grilling`" not in l))
+
+        self.assertIn(
+            ".agents/upstream/mattpocock/skills/productivity/grilling: no local skill with this name",
+            self.errors(remove),
+        )
+
+    def test_snapshot_link_naming_another_revision_fails(self) -> None:
+        def repin(copy: Path) -> None:
+            notice = copy / "NOTICE"
+            notice.write_text(notice.read_text().replace("a496f5513d4a4cf889bc48e189e579f4b0bdf6aa", "0" * 40))
+
+        self.assertIn(
+            "NOTICE: Matt's snapshot link must name the SOURCE revision a496f5513d4a4cf889bc48e189e579f4b0bdf6aa",
+            self.errors(repin),
+        )
+
+    def test_source_without_revision_fails(self) -> None:
+        def strip(copy: Path) -> None:
+            source = copy / ".agents/upstream/mattpocock/SOURCE"
+            source.write_text("".join(l for l in source.read_text().splitlines(True) if not l.startswith("revision")))
+
+        self.assertIn(".agents/upstream/mattpocock/SOURCE: revision must be a full commit SHA", self.errors(strip))
+
+    def test_missing_source_is_reported(self) -> None:
+        def delete(copy: Path) -> None:
+            (copy / ".agents/upstream/mattpocock/SOURCE").unlink()
+
+        self.assertEqual(self.errors(delete), [".agents/upstream/mattpocock/SOURCE: missing"])
 
 
 if __name__ == "__main__":
